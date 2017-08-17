@@ -9,6 +9,7 @@
 #import <Analytics/SEGIntegration.h>
 #import <NielsenAppApi/NielsenAppApi.h>
 
+
 @interface SEGNielsenDCRIntegration : NSObject <SEGIntegration>
 
 @property (nonatomic, strong) NSDictionary *settings;
@@ -20,4 +21,3 @@
 - (instancetype)initWithSettings:(NSDictionary *)settings andNielsen:(NielsenAppApi *)nielsen;
 
 @end
-

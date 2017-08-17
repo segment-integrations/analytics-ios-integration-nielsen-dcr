@@ -11,6 +11,7 @@
 #import <Analytics/SEGAnalytics.h>
 //#import <NielsenAppApi/NielsenAppApi.h>
 
+
 @implementation SEGNielsenDCRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -20,10 +21,10 @@
     [config use:[SEGNielsenDCRIntegrationFactory instance]];
     [SEGAnalytics setupWithConfiguration:config];
     [[SEGAnalytics sharedAnalytics] track:@"Video Playback Started"];
-    
+
     [[SEGAnalytics sharedAnalytics] flush];
     [SEGAnalytics debug:YES];
-    
+
     return YES;
 }
 

@@ -16,7 +16,7 @@
 {
     static dispatch_once_t once;
     static SEGNielsenDCRIntegrationFactory *sharedInstance;
-    
+
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
     });
@@ -30,7 +30,7 @@
 }
 
 - (id<SEGIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(SEGAnalytics *)analytics
-{    
+{
     return [[SEGNielsenDCRIntegration alloc] initWithSettings:settings andNielsen:nil];
 }
 

@@ -8,6 +8,7 @@
 
 @import UIKit;
 
+
 @interface SEGNielsenDCRAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
