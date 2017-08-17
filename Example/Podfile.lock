@@ -1,0 +1,31 @@
+PODS:
+  - Analytics (3.6.3)
+  - Expecta (1.0.6)
+  - OCHamcrest (6.1.1)
+  - OCMockito (4.1.0):
+    - OCHamcrest (~> 6.0)
+  - Segment-Nielsen-DCR (1.0.0):
+    - Analytics (~> 3.6)
+  - Specta (1.0.6)
+
+DEPENDENCIES:
+  - Expecta
+  - OCMockito
+  - Segment-Nielsen-DCR (from `../`)
+  - Specta
+
+EXTERNAL SOURCES:
+  Segment-Nielsen-DCR:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Analytics: be561304471ed2aa58c4881fea59362dc7bbb4a5
+  Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
+  OCHamcrest: 363e1bf738c3e8a94abe7c2c415f70d671adde38
+  OCMockito: bceefcd365252bcdf8b59c1b2bd23890805fc0d8
+  Segment-Nielsen-DCR: 624e9e70b177e160f5c14566e753f3eeca49e4ce
+  Specta: f506f3a8361de16bc0dcf3b17b75e269072ba465
+
+PODFILE CHECKSUM: e793c123c1317f200d9e9259817fe1554d7e08ed
+
+COCOAPODS: 1.2.1
