@@ -33,6 +33,43 @@ describe(@"SEGNielsenDCRIntegration", ^{
 
     });
 
+    it(@"calls screen with default values", ^{
+        SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:@"Main" properties:nil context:nil integrations:nil];
+
+        [integration screen:payload];
+
+        [verify(mockNielsenAppApi) loadMetadata:@{
+            @"type" : @"static",
+            @"section" : @"Main",
+            @"segA" : @"",
+            @"segB" : @"",
+            @"segC" : @"",
+            @"crossId1" : @""
+
+        }];
+    });
+
+    it(@"calls screen with integration specific options", ^{
+        SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:@"Main" properties:nil context:nil integrations:@{
+            @"nielsen-dcr" : @{
+                @"segA" : @"segmentA",
+                @"segB" : @"segmentB",
+                @"segC" : @"segmentC",
+                @"crossId1" : @"crossIdValue"
+            }
+        }];
+        [integration screen:payload];
+
+        [verify(mockNielsenAppApi) loadMetadata:@{
+            @"type" : @"static",
+            @"section" : @"Main",
+            @"segA" : @"segmentA",
+            @"segB" : @"segmentB",
+            @"segC" : @"segmentC",
+            @"crossId1" : @"crossIdValue"
+
+        }];
+    });
 
     it(@"tracks Video Playback Started", ^{
         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Started" properties:@{

@@ -203,7 +203,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 - (void)track:(SEGTrackPayload *)payload
 {
     NSDictionary *properties = payload.properties;
-    NSDictionary *options = [payload.integrations valueForKey:@"nielsen"];
+    NSDictionary *options = [payload.integrations valueForKey:@"nielsen-dcr"];
     NSDictionary *settings = settings;
 
 #pragma mark Playback Events
@@ -326,6 +326,25 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         [self.nielsen stop];
         return;
     }
+}
+
+
+#pragma mark - Screen
+
+- (void)screen:(SEGScreenPayload *)payload
+{
+    NSDictionary *options = [payload.integrations valueForKey:@"nielsen-dcr"];
+
+    NSDictionary *metadata = @{
+        @"type" : @"static",
+        @"section" : payload.name,
+        @"segA" : options[@"segA"] ?: @"",
+        @"segB" : options[@"segB"] ?: @"",
+        @"segC" : options[@"segC"] ?: @"",
+        @"crossId1" : options[@"crossId1"] ?: @""
+    };
+    [self.nielsen loadMetadata:metadata];
+    SEGLog(@"[NielsenAppApi loadMetadata:%@]", metadata);
 }
 
 @end
