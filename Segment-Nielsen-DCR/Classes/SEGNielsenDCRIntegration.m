@@ -85,8 +85,7 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
         @"airdate" : properties[@"airdate"] ?: @"",
-        @"length" : properties[@"total_length"] ?: @"",
-        @"hasAds" : @"2" // Nielsen will deprecate this, hardcoding 2 for now.
+        @"length" : properties[@"total_length"] ?: @""
     };
 
     return coerceToString(contentMetadata);
@@ -118,8 +117,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
         @"airdate" : properties[@"airdate"] ?: @"",
-        @"length" : properties[@"total_length"] ?: @"",
-        @"hasAds" : @"2" // Nielsen will deprecate this, hardcoding 2 for now.
+        @"length" : properties[@"total_length"] ?: @""
     };
     return coerceToString(adContentMetadata);
 }

@@ -34,7 +34,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
     });
 
     it(@"calls screen with default values", ^{
-        SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:@"Main" properties:nil context:nil integrations:nil];
+        SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:@"Main" properties:@{} context:@{} integrations:@{}];
 
         [integration screen:payload];
 
@@ -50,7 +50,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
     });
 
     it(@"calls screen with integration specific options", ^{
-        SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:@"Main" properties:nil context:nil integrations:@{
+        SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:@"Main" properties:@{} context:@{} integrations:@{
             @"nielsen-dcr" : @{
                 @"segA" : @"segmentA",
                 @"segB" : @"segmentB",
@@ -168,7 +168,6 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"isfullepisode" : @"y",
             @"airdate" : @"",
             @"length" : @"400",
-            @"hasAds" : @"2",
             @"airdate" : @""
         }];
     });
@@ -245,8 +244,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"program" : @"",
             @"isfullepisode" : @"sf",
             @"airdate" : @"",
-            @"length" : @"110",
-            @"hasAds" : @"2"
+            @"length" : @"110"
         }];
 
         [verify(mockNielsenAppApi) loadMetadata:@{
