@@ -10,6 +10,9 @@
 #import <Analytics/SEGAnalyticsUtils.h>
 #import <NielsenAppApi/NielsenAppApi.h>
 
+#pragma mark -
+#pragma mark Property Conversion
+#pragma mark -
 
 NSString *returnFullEpisodeStatus(NSDictionary *src, NSString *key)
 {
@@ -29,12 +32,6 @@ NSString *returnAdLoadType(NSDictionary *src, NSString *key)
     }
     return @"1";
 }
-
-
-#pragma mark -
-#pragma mark Heartbeat Timers
-#pragma mark -
-
 
 long long returnPlayheadPosition(SEGTrackPayload *payload)
 {
@@ -70,6 +67,10 @@ NSDictionary *coerceToString(NSDictionary *map)
 
     return [newMap copy];
 }
+
+#pragma mark -
+#pragma mark Metadata Mapping
+#pragma mark -
 
 NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictionary *options)
 {
@@ -122,7 +123,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
     return coerceToString(adContentMetadata);
 }
 
-#pragma mark -
+#pragma mark - Integration
 
 
 @interface SEGNielsenDCRIntegration () <NielsenAppApiDelegate>
@@ -163,6 +164,10 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 
     return self;
 }
+
+#pragma mark -
+#pragma mark Heartbeat Timers
+#pragma mark -
 
 - (void)playHeadTimeEvent:(NSTimer *)timer
 {
@@ -275,7 +280,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         return;
     }
 
-#pragma mark Content Events
+#pragma mark - Content Events
 
     if ([payload.event isEqualToString:@"Video Content Started"]) {
         NSDictionary *contentMetadata = returnMappedContentProperties(properties, options);
@@ -296,7 +301,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         return;
     }
 
-#pragma mark Ad Events
+#pragma mark - Ad Events
 
     if ([payload.event isEqualToString:@"Video Ad Started"]) {
         NSDictionary *adMetadata = returnMappedAdProperties(properties, options);
