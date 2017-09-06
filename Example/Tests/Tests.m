@@ -161,14 +161,15 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"adloadtype" : @"1",
             @"assetid" : @"3543",
             @"type" : @"content",
-            @"segB" : @"cartoon",
-            @"segC" : @"cartoon",
+            @"segB" : @"",
+            @"segC" : @"",
             @"title" : @"Big Trouble in Little Sanchez",
             @"program" : @"Rick and Morty",
             @"isfullepisode" : @"y",
             @"airdate" : @"",
             @"length" : @"400",
-            @"airdate" : @""
+            @"airdate" : @"",
+            @"crossId1" : @""
         }];
     });
 
@@ -244,7 +245,8 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"program" : @"",
             @"isfullepisode" : @"sf",
             @"airdate" : @"",
-            @"length" : @"110"
+            @"length" : @"110",
+            @"crossId1" : @""
         }];
 
         [verify(mockNielsenAppApi) loadMetadata:@{

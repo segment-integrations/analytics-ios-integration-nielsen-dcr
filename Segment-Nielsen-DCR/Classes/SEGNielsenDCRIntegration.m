@@ -74,19 +74,19 @@ NSDictionary *coerceToString(NSDictionary *map)
 
 NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictionary *options)
 {
-    // todo: Find out what default value Nielsen expects
     NSDictionary *contentMetadata = @{
         @"pipmode" : options[@"pipmode"] ?: @"false",
         @"adloadtype" : returnAdLoadType(options, @"ad_load_type"),
         @"assetid" : properties[@"asset_id"] ?: @"",
         @"type" : @"content",
-        @"segB" : properties[@"genre"] ?: @"",
-        @"segC" : properties[@"genre"] ?: @"",
+        @"segB" : options[@"segB"] ?: @"",
+        @"segC" : options[@"segC"] ?: @"",
         @"title" : properties[@"title"] ?: @"",
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
         @"airdate" : properties[@"airdate"] ?: @"",
-        @"length" : properties[@"total_length"] ?: @""
+        @"length" : properties[@"total_length"] ?: @"",
+        @"crossId1" : options[@"cross_id_1"] ?: @""
     };
 
     return coerceToString(contentMetadata);
@@ -95,7 +95,6 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
 NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *options)
 {
     NSDictionary *adMetadata = @{
-        // Nielsen requires content metadata on ad events
         @"assetid" : properties[@"asset_id"] ?: @"",
         @"type" : properties[@"type"] ?: @"",
         @"title" : properties[@"title"] ?: @""
@@ -112,13 +111,14 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         @"pipmode" : options[@"pipmode"] ?: @"false",
         @"adloadtype" : returnAdLoadType(properties, @"load_type"),
         @"type" : @"content",
-        @"segB" : properties[@"genre"] ?: @"",
-        @"segC" : properties[@"genre"] ?: @"",
+        @"segB" : options[@"segB"] ?: @"",
+        @"segC" : options[@"segC"] ?: @"",
         @"title" : properties[@"title"] ?: @"",
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
         @"airdate" : properties[@"airdate"] ?: @"",
-        @"length" : properties[@"total_length"] ?: @""
+        @"length" : properties[@"total_length"] ?: @"",
+        @"crossId1" : options[@"cross_id_1"] ?: @""
     };
     return coerceToString(adContentMetadata);
 }
@@ -207,8 +207,6 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 {
     NSDictionary *properties = payload.properties;
     NSDictionary *options = [payload.integrations valueForKey:@"nielsen-dcr"];
-    NSDictionary *settings = settings;
-
 #pragma mark Playback Events
 
     if ([payload.event isEqualToString:@"Video Playback Started"]) {
@@ -246,11 +244,6 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 
     if ([payload.event isEqualToString:@"Video Playback Buffer Completed"]) {
         [self startPlayheadTimer:payload];
-        return;
-    }
-
-    if ([payload.event isEqualToString:@"Video Playback Seek Started"]) {
-        [self stopPlayheadTimer:payload];
         return;
     }
 
@@ -340,7 +333,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 
     NSDictionary *metadata = @{
         @"type" : @"static",
-        @"section" : payload.name,
+        @"section" : payload.name ?: @"Unknown",
         @"segA" : options[@"segA"] ?: @"",
         @"segB" : options[@"segB"] ?: @"",
         @"segC" : options[@"segC"] ?: @"",
