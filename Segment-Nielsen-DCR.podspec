@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.preserve_paths = 'Segment-Nielsen-DCR/Classes/**/*'
+  s.source_files = 'Segment-Nielsen-DCR/Classes/**/*'
 
   s.dependency 'Analytics', '~> 3.6'
 
