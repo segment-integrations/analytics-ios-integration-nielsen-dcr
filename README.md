@@ -16,9 +16,11 @@ it, add the following line to your Podfile:
 pod "Segment-Nielsen-DCR"
 ```
 
-The integration relies on the the Nielsen framework, which is not available on Cocoapods. You must manually include the framework in your project. Navigate to [Nielsen's Engineering Site](https://engineeringforum.nielsen.com/sdk/developers/downloads.php) and download the following Video framework:
+The integration relies on the the Nielsen framework, which is not available on Cocoapods. You must manually include the framework in your project. Navigate to [Nielsen's Engineering Site](https://engineeringportal.nielsen.com/docs/Main_Page) and download the following Video framework:
 
-![](http://i.imgur.com/Xp1kRWd.png+)
+![](http://g.recordit.co/IvvLm8oAY2.gif)
+
+There will be an NDA to sign prior to accessing the download. Nielsen requires you fill out your company info and have a Nielsen representative before getting started.
 
 Nielsen also requires the following frameworks, which must be included into Link Binary with Libraries (within app target’s Build Phases)
   - AdSupport.framework
