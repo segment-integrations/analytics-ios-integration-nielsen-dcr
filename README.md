@@ -1,3 +1,4 @@
+[![Circle CI](https://circleci.com/gh/segment-integrations/analytics-ios-integration-nielsen-dcr.svg?style=svg&circle-token=b81a1829e557edc97e746beb8fc58df1da1e583c)](https://circleci.com/gh/segment-integrations/analytics-ios-integration-nielsen-dcr)
 # Segment-Nielsen-DCR
 
 [![CI Status](http://img.shields.io/travis/segment-integrations/analytics-ios-integration-nielsen-dcr.svg?style=flat)](https://travis-ci.org/segment-integrations/analytics-ios-integration-nielsen-dcr)
