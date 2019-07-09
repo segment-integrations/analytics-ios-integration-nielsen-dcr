@@ -19,6 +19,9 @@ build:
 test:
 	xcodebuild test $(XC_ARGS) | $(XCPRETTY)
 
+lint:
+	pod lib lint --use-libraries --allow-warnings
+
 xcbuild:
 	xctool $(XC_ARGS)
 
