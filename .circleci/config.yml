@@ -31,4 +31,3 @@ workflows:
   build_and_test:
     jobs:
       - build_and_tests
-.circleci/circle.yml
