@@ -149,12 +149,16 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
             sfCode = @"dcr-cert";
         }
 
-        NSDictionary *appInformation = @{
+        NSMutableDictionary *appInformation = [[NSMutableDictionary alloc] initWithDictionary: @{
             @"appid" : settings[@"appId"] ?: @"",
             @"appname" : appName ?: @"",
             @"appversion" : appVersion ?: @"",
             @"sfcode" : sfCode
-        };
+        }];
+
+        if ([settings[@"nolDevDebug"] boolValue]) {
+            [appInfo addEntriesFromDictionary:@{@"nol_devDebug": @"DEBUG"}];
+        }
 
         if (nielsen == nil) {
             self.nielsen = [[NielsenAppApi alloc] initWithAppInfo:appInformation delegate:nil];
