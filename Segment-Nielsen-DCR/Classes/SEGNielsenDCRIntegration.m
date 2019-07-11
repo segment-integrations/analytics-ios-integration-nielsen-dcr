@@ -20,7 +20,7 @@ NSString *returnFullEpisodeStatus(NSDictionary *src, NSString *key)
     if ([value isEqual:@YES]) {
         return @"y";
     }
-    return @"sf";
+    return @"n";
 }
 
 
@@ -31,6 +31,15 @@ NSString *returnAdLoadType(NSDictionary *src, NSString *key)
         return @"2";
     }
     return @"1";
+}
+
+NSString *returnHasAdsStatus(NSDictionary *src, NSString *key)
+{
+    NSString *value = [src valueForKey:key];
+    if ([value isEqualToString:@YES]) {
+        return @"1";
+    }
+    return @"0";
 }
 
 long long returnPlayheadPosition(SEGTrackPayload *payload)
@@ -84,9 +93,11 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"title" : properties[@"title"] ?: @"",
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
+        @"hasAds" : returnHasAdsStatus(options, @"has_ads"),
         @"airdate" : properties[@"airdate"] ?: @"",
         @"length" : properties[@"total_length"] ?: @"",
-        @"crossId1" : options[@"cross_id_1"] ?: @""
+        @"crossId1" : options[@"cross_id_1"] ?: @"",
+        @"crossId2" : options[@"cross_id_2"] ?: @""
     };
 
     return coerceToString(contentMetadata);
