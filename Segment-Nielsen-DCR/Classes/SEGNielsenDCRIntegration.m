@@ -127,9 +127,12 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         @"title" : properties[@"title"] ?: @"",
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
+        @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
         @"airdate" : properties[@"airdate"] ?: @"",
         @"length" : properties[@"total_length"] ?: @"",
-        @"crossId1" : options[@"cross_id_1"] ?: @""
+        @"crossId1" : options[@"crossId1"] ?: @""
+        @"crossId2" : options[@"crossId2"] ?: @""
+
     };
     return coerceToString(adContentMetadata);
 }
