@@ -20,7 +20,7 @@ NSString *returnFullEpisodeStatus(NSDictionary *src, NSString *key)
     if ([value isEqual:@YES]) {
         return @"y";
     }
-    return @"sf";
+    return @"n";
 }
 
 
@@ -31,6 +31,15 @@ NSString *returnAdLoadType(NSDictionary *src, NSString *key)
         return @"2";
     }
     return @"1";
+}
+
+NSString *returnHasAdsStatus(NSDictionary *src, NSString *key)
+{
+    NSString *value = [src valueForKey:key];
+    if ([value isEqualToString:@YES]) {
+        return @"1";
+    }
+    return @"0";
 }
 
 long long returnPlayheadPosition(SEGTrackPayload *payload)
@@ -76,7 +85,7 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
 {
     NSDictionary *contentMetadata = @{
         @"pipmode" : options[@"pipmode"] ?: @"false",
-        @"adloadtype" : returnAdLoadType(options, @"ad_load_type"),
+        @"adloadtype" : returnAdLoadType(options, @"adLoadType"),
         @"assetid" : properties[@"asset_id"] ?: @"",
         @"type" : @"content",
         @"segB" : options[@"segB"] ?: @"",
@@ -84,9 +93,11 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"title" : properties[@"title"] ?: @"",
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
+        @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
         @"airdate" : properties[@"airdate"] ?: @"",
         @"length" : properties[@"total_length"] ?: @"",
-        @"crossId1" : options[@"cross_id_1"] ?: @""
+        @"crossId1" : options[@"crossId1"] ?: @"",
+        @"crossId2" : options[@"crossId2"] ?: @""
     };
 
     return coerceToString(contentMetadata);
@@ -116,9 +127,12 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         @"title" : properties[@"title"] ?: @"",
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
+        @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
         @"airdate" : properties[@"airdate"] ?: @"",
         @"length" : properties[@"total_length"] ?: @"",
-        @"crossId1" : options[@"cross_id_1"] ?: @""
+        @"crossId1" : options[@"crossId1"] ?: @""
+        @"crossId2" : options[@"crossId2"] ?: @""
+
     };
     return coerceToString(adContentMetadata);
 }
@@ -149,12 +163,16 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
             sfCode = @"dcr-cert";
         }
 
-        NSDictionary *appInformation = @{
+        NSMutableDictionary *appInformation = [[NSMutableDictionary alloc] initWithDictionary: @{
             @"appid" : settings[@"appId"] ?: @"",
             @"appname" : appName ?: @"",
             @"appversion" : appVersion ?: @"",
             @"sfcode" : sfCode
-        };
+        }];
+
+        if ([settings[@"nolDevDebug"] boolValue]) {
+            [appInfo addEntriesFromDictionary:@{@"nol_devDebug": @"DEBUG"}];
+        }
 
         if (nielsen == nil) {
             self.nielsen = [[NielsenAppApi alloc] initWithAppInfo:appInformation delegate:nil];

@@ -1,3 +1,4 @@
+[![Circle CI](https://circleci.com/gh/segment-integrations/analytics-ios-integration-nielsen-dcr.svg?style=svg&circle-token=b81a1829e557edc97e746beb8fc58df1da1e583c)](https://circleci.com/gh/segment-integrations/analytics-ios-integration-nielsen-dcr)
 # Segment-Nielsen-DCR
 
 [![CI Status](http://img.shields.io/travis/segment-integrations/analytics-ios-integration-nielsen-dcr.svg?style=flat)](https://travis-ci.org/segment-integrations/analytics-ios-integration-nielsen-dcr)
@@ -7,7 +8,7 @@
 
 ## Installation
 
-Nielsen App SDK is compatible with Apple iOS versions 7.0 and above.
+The Nielsen App SDK as of version 6.0.0.0 is compatible with Apple iOS version 8.0 and above.
 
 Segment-Nielsen SDK is available through [CocoaPods](http://cocoapods.org). To install
 it, add the following line to your Podfile:
@@ -16,7 +17,50 @@ it, add the following line to your Podfile:
 pod "Segment-Nielsen-DCR"
 ```
 
-The integration relies on the the Nielsen framework, which is not available on Cocoapods. You must manually include the framework in your project. Navigate to [Nielsen's Engineering Site](https://engineeringportal.nielsen.com/docs/Main_Page) and download the following Video framework:
+The integration relies on the the Nielsen framework, which can either be installed via Cocoapods or by manually adding the framework. You will need to have a Nielsen representative to get started.
+
+## Cocoapods
+
+When using the Nielsen SDK version 6.2.0.0 and above, Nielsen recommends installation via Cocoapods, and Apple recommends using the dynamic framework.
+
+Installation of the Dynamic Nielsen App Framework SDK via Cocoapods requires a Cocoapods version 1.6.1 or higher. Installation of the Static Nielsen App Framework SDK via Cocoapods requires a Cocoapods version 1.4.0 or higher.
+
+1. **Set your repository credentials.** The first step is to add the credentials received from Nielsen into your `.netrc` file. Navigate to your home folder and create a file called `.netrc`
+```
+cd ~/
+vi .netrc
+```
+You will need to fill out a license agreement form and have the contact information for your Nielsen representative in order to obtain the credentials [here](https://engineeringportal.nielsen.com/docs/Special:Downloads). Add the credentials in the following format:
+```
+machine raw.githubusercontent.com
+login <Nielsen App SDK client>
+password <Auth token>
+```
+
+2. **Add the source to your Podfile**
+
+  Dynamic Framework (Note: you will need to include `use_frameworks!`)
+```
+source 'https://github.com/NielsenDigitalSDK/nielsenappsdk-ios-specs-dynamic.git'
+```
+Static Framework
+```
+source 'https://github.com/NielsenDigitalSDK/nielsenappsdk-ios-specs.git'
+```
+
+3. **Add the pod to your Podfile**
+
+  `pod NielsenAppSDK`
+
+4. **Install the pods**
+
+  `pod install`
+
+***A list of full instructions can be found [here](https://engineeringportal.nielsen.com/docs/Digital_Measurement_iOS_Artifactory_Guide)***
+
+## Manual
+
+Navigate to [Nielsen's Engineering Site](https://engineeringportal.nielsen.com/docs/Main_Page) and download the following Video framework:
 
 ![](http://g.recordit.co/IvvLm8oAY2.gif)
 
@@ -28,11 +72,12 @@ Nielsen also requires the following frameworks, which must be included into Link
   - CoreLocation.framework (Not applicable for International (Germany))
   - libsqlite3
 
-After extracting the “NielsenAppApi.framework” from the Nielsen App SDK package and copying it to the ‘Frameworks’ folder of the Xcode project, import the Segment-Nielsen SDK header file in your `AppDelegate` :
+## Usage
+
+After you have properly installed the Nielsen App SDK, Register the factory with Segment SDK in the `application:didFinishLaunchingWithOptions`  method of your `AppDelegate`:
 
 `#import <Segment-Nielsen-DCR/SEGNielsenDCRIntegrationFactory.h>`
 
-Then register the factory with the Segment SDK:
 
 ```
 NSString *const SEGMENT_WRITE_KEY = @" ... ";
