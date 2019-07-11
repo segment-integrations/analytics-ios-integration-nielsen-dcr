@@ -1,7 +1,6 @@
-[![Circle CI](https://circleci.com/gh/segment-integrations/analytics-ios-integration-nielsen-dcr.svg?style=svg&circle-token=b81a1829e557edc97e746beb8fc58df1da1e583c)](https://circleci.com/gh/segment-integrations/analytics-ios-integration-nielsen-dcr)
 # Segment-Nielsen-DCR
 
-[![CI Status](http://img.shields.io/travis/segment-integrations/analytics-ios-integration-nielsen-dcr.svg?style=flat)](https://travis-ci.org/segment-integrations/analytics-ios-integration-nielsen-dcr)
+[![Circle CI](https://circleci.com/gh/segment-integrations/analytics-ios-integration-nielsen-dcr.svg?style=svg&circle-token=9df3a0f8385bd1f43655f79cf649035cfe538035)](https://circleci.com/gh/segment-integrations/analytics-ios-integration-nielsen-dcr)
 [![Version](https://img.shields.io/cocoapods/v/Segment-Nielsen-DCR.svg?style=flat)](http://cocoapods.org/pods/Segment-Nielsen-DCR)
 [![License](https://img.shields.io/cocoapods/l/Segment-Nielsen-DCR.svg?style=flat)](http://cocoapods.org/pods/Segment-Nielsen-DCR)
 [![Platform](https://img.shields.io/cocoapods/p/Segment-Nielsen-DCR.svg?style=flat)](http://cocoapods.org/pods/Segment-Nielsen-DCR)
