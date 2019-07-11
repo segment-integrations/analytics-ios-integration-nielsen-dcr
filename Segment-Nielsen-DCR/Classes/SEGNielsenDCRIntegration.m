@@ -85,7 +85,7 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
 {
     NSDictionary *contentMetadata = @{
         @"pipmode" : options[@"pipmode"] ?: @"false",
-        @"adloadtype" : returnAdLoadType(options, @"ad_load_type"),
+        @"adloadtype" : returnAdLoadType(options, @"adLoadType"),
         @"assetid" : properties[@"asset_id"] ?: @"",
         @"type" : @"content",
         @"segB" : options[@"segB"] ?: @"",
@@ -93,11 +93,11 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"title" : properties[@"title"] ?: @"",
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
-        @"hasAds" : returnHasAdsStatus(options, @"has_ads"),
+        @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
         @"airdate" : properties[@"airdate"] ?: @"",
         @"length" : properties[@"total_length"] ?: @"",
-        @"crossId1" : options[@"cross_id_1"] ?: @"",
-        @"crossId2" : options[@"cross_id_2"] ?: @""
+        @"crossId1" : options[@"crossId1"] ?: @"",
+        @"crossId2" : options[@"crossId2"] ?: @""
     };
 
     return coerceToString(contentMetadata);
