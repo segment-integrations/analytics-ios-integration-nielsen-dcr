@@ -1,5 +1,9 @@
 Change Log
 ==========
+Version 1.1.1 *(15th July, 2019)*
+-------------------------------------------
+* Fix casing of mediaUrl and channelName to have  parity with Android. 
+
 Version 1.1.0 *(11th July, 2019)*
 -------------------------------------------
 * Add debug flag/setting
