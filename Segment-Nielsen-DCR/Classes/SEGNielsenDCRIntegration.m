@@ -230,9 +230,9 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
     if ([payload.event isEqualToString:@"Video Playback Started"]) {
         NSDictionary *channelInfo = @{
             // channelName is optional for DCR, if not present Nielsen asks to set default
-            @"channelName" : options[@"channel_name"] ?: @"defaultChannelName",
+            @"channelName" : options[@"channelName"] ?: @"defaultChannelName",
             // if mediaURL is not available, Nielsen expects an empty value
-            @"mediaURL" : options[@"media_url"] ?: @""
+            @"mediaURL" : options[@"mediaUrl"] ?: @""
         };
 
 
@@ -273,9 +273,9 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
     if ([payload.event isEqualToString:@"Video Playback Resumed"]) {
         NSDictionary *channelInfo = @{
             // channelName is optional for DCR, if not present Nielsen asks to set default
-            @"channelName" : options[@"channel_name"] ?: @"defaultChannelName",
+            @"channelName" : options[@"channelName"] ?: @"defaultChannelName",
             // if mediaURL is not available, Nielsen expects an empty value
-            @"mediaURL" : options[@"media_url"] ?: @""
+            @"mediaURL" : options[@"mediaUrl"] ?: @""
         };
 
         [self startPlayheadTimer:payload];
