@@ -130,7 +130,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
         @"airdate" : properties[@"airdate"] ?: @"",
         @"length" : properties[@"total_length"] ?: @"",
-        @"crossId1" : options[@"crossId1"] ?: @""
+        @"crossId1" : options[@"crossId1"] ?: @"",
         @"crossId2" : options[@"crossId2"] ?: @""
 
     };
@@ -171,7 +171,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         }];
 
         if ([settings[@"nolDevDebug"] boolValue]) {
-            [appInfo addEntriesFromDictionary:@{@"nol_devDebug": @"DEBUG"}];
+            [appInformation addEntriesFromDictionary:@{@"nol_devDebug": @"DEBUG"}];
         }
 
         if (nielsen == nil) {
