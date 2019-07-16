@@ -35,8 +35,8 @@ NSString *returnAdLoadType(NSDictionary *src, NSString *key)
 
 NSString *returnHasAdsStatus(NSDictionary *src, NSString *key)
 {
-    NSString *value = [src valueForKey:key];
-    if ([value isEqualToString:@YES]) {
+    NSNumber *value = [src valueForKey:key];
+    if ([value isEqual:@YES]) {
         return @"1";
     }
     return @"0";

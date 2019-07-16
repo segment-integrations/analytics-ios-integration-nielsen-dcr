@@ -17,10 +17,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //https://segment.com/ladanazita/sources/video/debugger
-    SEGAnalyticsConfiguration *config = [SEGAnalyticsConfiguration configurationWithWriteKey:@"nu3idUpAunUqh7pJWwFsgUKg7qTo7Ouz"];
+    SEGAnalyticsConfiguration *config = [SEGAnalyticsConfiguration configurationWithWriteKey:@"5BZlN8itngsm46QK8k0sdWBjEYlam2RM"];
     [config use:[SEGNielsenDCRIntegrationFactory instance]];
     [SEGAnalytics setupWithConfiguration:config];
     [[SEGAnalytics sharedAnalytics] track:@"Video Playback Started"];
+    [[SEGAnalytics sharedAnalytics] track:@"Video Content Started"
+                           properties: @{ @"full_episode": @true }
+                              options: @{
+                                @"integrations": @{
+                                        @"nielsen-dcr": @{
+                                          @"pipmode": @"2017-05-22",
+                                          @"adLoadType": @"c3 value",
+                                          @"channelName": @"c4 value",
+                                          @"mediaUrl": @"c6 value",
+                                          @"hasAds": @true,
+                                          @"crossId1": @"cross id1 value",
+                                          @"crossId2": @"cross id2 value"
+                                         }
+                                       }
+                            }];
 
     [[SEGAnalytics sharedAnalytics] flush];
     [SEGAnalytics debug:YES];
