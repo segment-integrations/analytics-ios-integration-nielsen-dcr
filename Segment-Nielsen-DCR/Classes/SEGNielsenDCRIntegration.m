@@ -35,11 +35,24 @@ NSString *returnAdLoadType(NSDictionary *src, NSString *key)
 
 NSString *returnHasAdsStatus(NSDictionary *src, NSString *key)
 {
-    NSString *value = [src valueForKey:key];
-    if ([value isEqualToString:@YES]) {
+    NSNumber *value = [src valueForKey:key];
+    if ([value isEqual:@YES]) {
         return @"1";
     }
     return @"0";
+}
+
+NSString *returnCustomAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
+{
+    NSString *customKey = settings[@"assetIdPropertyName"];
+    NSString *value;
+    if (customKey){
+        value = [properties valueForKey:customKey];
+    } else {
+        value = [properties valueForKey:defaultKey];
+    }
+    value = value ? value : @"";
+    return value;
 }
 
 long long returnPlayheadPosition(SEGTrackPayload *payload)
@@ -81,12 +94,12 @@ NSDictionary *coerceToString(NSDictionary *map)
 #pragma mark Metadata Mapping
 #pragma mark -
 
-NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictionary *options)
+NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
 {
     NSDictionary *contentMetadata = @{
         @"pipmode" : options[@"pipmode"] ?: @"false",
         @"adloadtype" : returnAdLoadType(options, @"adLoadType"),
-        @"assetid" : properties[@"asset_id"] ?: @"",
+        @"assetid" : returnCustomAssetId(properties, @"asset_id", settings),
         @"type" : @"content",
         @"segB" : options[@"segB"] ?: @"",
         @"segC" : options[@"segC"] ?: @"",
@@ -99,14 +112,25 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"crossId1" : options[@"crossId1"] ?: @"",
         @"crossId2" : options[@"crossId2"] ?: @""
     };
+    
+    NSMutableDictionary *mutableContentMetada = [contentMetadata mutableCopy];
+    if (settings[@"subbrandPropertyName"]){
+        NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
+        [mutableContentMetada setObject:subbrandValue forKey:@"subbrand"];
+    }
+    
+    if (settings[@"clientIdPropertyName"]){
+        NSString *clientIdValue = properties[settings[@"clientIdPropertyName"]] ?: @"";
+        [mutableContentMetada setObject:clientIdValue forKey:@"clientid"];
+    }
 
-    return coerceToString(contentMetadata);
+    return coerceToString(mutableContentMetada);
 }
 
-NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *options)
+NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
 {
     NSDictionary *adMetadata = @{
-        @"assetid" : properties[@"asset_id"] ?: @"",
+        @"assetid" : returnCustomAssetId(properties, @"asset_id", settings),
         @"type" : properties[@"type"] ?: @"",
         @"title" : properties[@"title"] ?: @""
 
@@ -115,10 +139,10 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 }
 
 // In case of ad type preroll, we need to map content metadata on ad events
-NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictionary *options)
+NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
 {
     NSDictionary *adContentMetadata = @{
-        @"assetid" : properties[@"content_asset_id"] ?: @"",
+        @"assetid" : returnCustomAssetId(properties, @"content_asset_id", settings),
         @"pipmode" : options[@"pipmode"] ?: @"false",
         @"adloadtype" : returnAdLoadType(properties, @"load_type"),
         @"type" : @"content",
@@ -134,7 +158,18 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         @"crossId2" : options[@"crossId2"] ?: @""
 
     };
-    return coerceToString(adContentMetadata);
+    
+    NSMutableDictionary *mutableAdContentMetadata = [adContentMetadata mutableCopy];
+    if (settings[@"subbrandPropertyName"]){
+        NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
+        [mutableAdContentMetadata setObject:subbrandValue forKey:@"subbrand"];
+    }
+    
+    if (settings[@"clientIdPropertyName"]){
+        NSString *clientIdValue = properties[settings[@"clientIdPropertyName"]] ?: @"";
+        [mutableAdContentMetadata setObject:clientIdValue forKey:@"clientid"];
+    }
+    return coerceToString(mutableAdContentMetadata);
 }
 
 #pragma mark - Integration
@@ -294,7 +329,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 #pragma mark - Content Events
 
     if ([payload.event isEqualToString:@"Video Content Started"]) {
-        NSDictionary *contentMetadata = returnMappedContentProperties(properties, options);
+        NSDictionary *contentMetadata = returnMappedContentProperties(properties, options, self.settings);
         [self.nielsen loadMetadata:contentMetadata];
         SEGLog(@"[NielsenAppApi loadMetadata:%@]", contentMetadata);
         [self startPlayheadTimer:payload];
@@ -315,11 +350,11 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 #pragma mark - Ad Events
 
     if ([payload.event isEqualToString:@"Video Ad Started"]) {
-        NSDictionary *adMetadata = returnMappedAdProperties(properties, options);
+        NSDictionary *adMetadata = returnMappedAdProperties(properties, options, self.settings);
 
         // In case of ad `type` preroll, call `loadMetadata` with metadata values for content, followed by `loadMetadata` with ad (preroll) metadata
         if ([properties[@"type"] isEqualToString:@"pre-roll"]) {
-            NSDictionary *adContentMetadata = returnMappedAdContentProperties(properties, options);
+            NSDictionary *adContentMetadata = returnMappedAdContentProperties(properties, options, self.settings);
             [self.nielsen loadMetadata:adContentMetadata];
             SEGLog(@"[NielsenAppApi loadMetadata:%@]", adContentMetadata);
         }
