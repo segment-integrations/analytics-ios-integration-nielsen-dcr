@@ -17,12 +17,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //https://segment.com/ladanazita/sources/video/debugger
-    SEGAnalyticsConfiguration *config = [SEGAnalyticsConfiguration configurationWithWriteKey:@"5BZlN8itngsm46QK8k0sdWBjEYlam2RM"];
+    SEGAnalyticsConfiguration *config = [SEGAnalyticsConfiguration configurationWithWriteKey:@"YOUR_WRITE_KEY_HERE"];
     [config use:[SEGNielsenDCRIntegrationFactory instance]];
     [SEGAnalytics setupWithConfiguration:config];
     [[SEGAnalytics sharedAnalytics] track:@"Video Playback Started"];
     [[SEGAnalytics sharedAnalytics] track:@"Video Content Started"
-                           properties: @{ @"full_episode": @true }
+                           properties: @{ @"full_episode": @true, @"tms_video_id": @"3ru239ur829u4u8t480248w" }
                               options: @{
                                 @"integrations": @{
                                         @"nielsen-dcr": @{

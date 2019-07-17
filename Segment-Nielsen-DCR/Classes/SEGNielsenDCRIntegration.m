@@ -42,6 +42,18 @@ NSString *returnHasAdsStatus(NSDictionary *src, NSString *key)
     return @"0";
 }
 
+NSString *returnCustomAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
+{
+    NSString *customKey = settings[@"customAssetId"];
+    if (customKey){
+        NSString *value = [properties valueForKey:customKey];
+        return value;
+    } else {
+        NSString *value = [properties valueForKey:defaultKey];
+        return value;
+    }
+}
+
 long long returnPlayheadPosition(SEGTrackPayload *payload)
 {
     long long playheadPosition = 0;
@@ -81,12 +93,12 @@ NSDictionary *coerceToString(NSDictionary *map)
 #pragma mark Metadata Mapping
 #pragma mark -
 
-NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictionary *options)
+NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
 {
     NSDictionary *contentMetadata = @{
         @"pipmode" : options[@"pipmode"] ?: @"false",
         @"adloadtype" : returnAdLoadType(options, @"adLoadType"),
-        @"assetid" : properties[@"asset_id"] ?: @"",
+        @"assetid" : returnCustomAssetId(properties, @"asset_id", settings),
         @"type" : @"content",
         @"segB" : options[@"segB"] ?: @"",
         @"segC" : options[@"segC"] ?: @"",
@@ -294,7 +306,7 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 #pragma mark - Content Events
 
     if ([payload.event isEqualToString:@"Video Content Started"]) {
-        NSDictionary *contentMetadata = returnMappedContentProperties(properties, options);
+        NSDictionary *contentMetadata = returnMappedContentProperties(properties, options, self.settings);
         [self.nielsen loadMetadata:contentMetadata];
         SEGLog(@"[NielsenAppApi loadMetadata:%@]", contentMetadata);
         [self startPlayheadTimer:payload];
