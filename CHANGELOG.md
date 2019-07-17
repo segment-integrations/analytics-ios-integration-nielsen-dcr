@@ -1,5 +1,11 @@
 Change Log
 ==========
+Version 1.2.0 *(17th July, 2019)*
+-------------------------------------------
+* Adds functionality support setting custom assetid ("assetIdPropertyName") in Segment UI. This is used to override default property mapping for Segment property 'asset_id' to Nielsen 'assetid' when present.
+* Adds functionality support setting custom clientid ("clientIdPropertyName") in Segment UI. This is used to override the 'cid'/'clientid' value sent to Nielsen in 'loadMetadata()' events.
+* Adds functionality support setting custom subbrand ("subbrandPropertyName") in Segment UI. This is used to override the 'vcid'/'subbrand' value sent to Nielsen in 'loadMetadata()' events.
+
 Version 1.1.2 *(16th July, 2019)*
 -------------------------------------------
 * Fix syntax errors of Content Metadata and AppInformation.
