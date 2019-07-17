@@ -44,14 +44,15 @@ NSString *returnHasAdsStatus(NSDictionary *src, NSString *key)
 
 NSString *returnCustomAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
 {
-    NSString *customKey = settings[@"customAssetId"];
+    NSString *customKey = settings[@"assetIdPropertyName"];
+    NSString *value;
     if (customKey){
-        NSString *value = [properties valueForKey:customKey];
-        return value;
+        value = [properties valueForKey:customKey];
     } else {
-        NSString *value = [properties valueForKey:defaultKey];
-        return value;
+        value = [properties valueForKey:defaultKey];
     }
+    value = value ? value : @"";
+    return value;
 }
 
 long long returnPlayheadPosition(SEGTrackPayload *payload)
@@ -115,10 +116,10 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
     return coerceToString(contentMetadata);
 }
 
-NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *options)
+NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
 {
     NSDictionary *adMetadata = @{
-        @"assetid" : properties[@"asset_id"] ?: @"",
+        @"assetid" : returnCustomAssetId(properties, @"asset_id", settings),
         @"type" : properties[@"type"] ?: @"",
         @"title" : properties[@"title"] ?: @""
 
@@ -127,10 +128,10 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 }
 
 // In case of ad type preroll, we need to map content metadata on ad events
-NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictionary *options)
+NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
 {
     NSDictionary *adContentMetadata = @{
-        @"assetid" : properties[@"content_asset_id"] ?: @"",
+        @"assetid" : returnCustomAssetId(properties, @"content_asset_id", settings),
         @"pipmode" : options[@"pipmode"] ?: @"false",
         @"adloadtype" : returnAdLoadType(properties, @"load_type"),
         @"type" : @"content",
@@ -327,11 +328,11 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 #pragma mark - Ad Events
 
     if ([payload.event isEqualToString:@"Video Ad Started"]) {
-        NSDictionary *adMetadata = returnMappedAdProperties(properties, options);
+        NSDictionary *adMetadata = returnMappedAdProperties(properties, options, self.settings);
 
         // In case of ad `type` preroll, call `loadMetadata` with metadata values for content, followed by `loadMetadata` with ad (preroll) metadata
         if ([properties[@"type"] isEqualToString:@"pre-roll"]) {
-            NSDictionary *adContentMetadata = returnMappedAdContentProperties(properties, options);
+            NSDictionary *adContentMetadata = returnMappedAdContentProperties(properties, options, self.settings);
             [self.nielsen loadMetadata:adContentMetadata];
             SEGLog(@"[NielsenAppApi loadMetadata:%@]", adContentMetadata);
         }
