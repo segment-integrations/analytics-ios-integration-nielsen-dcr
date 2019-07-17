@@ -112,8 +112,19 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"crossId1" : options[@"crossId1"] ?: @"",
         @"crossId2" : options[@"crossId2"] ?: @""
     };
+    
+    NSMutableDictionary *mutableContentMetada = [contentMetadata mutableCopy];
+    if (settings[@"subbrandPropertyName"]){
+        NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
+        [mutableContentMetada setObject:subbrandValue forKey:@"subbrand"];
+    }
+    
+    if (settings[@"clientIdPropertyName"]){
+        NSString *clientIdValue = properties[settings[@"clientIdPropertyName"]] ?: @"";
+        [mutableContentMetada setObject:clientIdValue forKey:@"clientid"];
+    }
 
-    return coerceToString(contentMetadata);
+    return coerceToString(mutableContentMetada);
 }
 
 NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
