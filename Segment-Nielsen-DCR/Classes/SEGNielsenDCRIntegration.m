@@ -158,7 +158,18 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         @"crossId2" : options[@"crossId2"] ?: @""
 
     };
-    return coerceToString(adContentMetadata);
+    
+    NSMutableDictionary *mutableAdContentMetadata = [adContentMetadata mutableCopy];
+    if (settings[@"subbrandPropertyName"]){
+        NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
+        [mutableAdContentMetadata setObject:subbrandValue forKey:@"subbrand"];
+    }
+    
+    if (settings[@"clientIdPropertyName"]){
+        NSString *clientIdValue = properties[settings[@"clientIdPropertyName"]] ?: @"";
+        [mutableAdContentMetadata setObject:clientIdValue forKey:@"clientid"];
+    }
+    return coerceToString(mutableAdContentMetadata);
 }
 
 #pragma mark - Integration
