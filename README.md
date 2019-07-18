@@ -9,7 +9,7 @@
 
 The Nielsen App SDK as of version 6.0.0.0 is compatible with Apple iOS version 8.0 and above.
 
-Segment-Nielsen SDK is available through [CocoaPods](http://cocoapods.org). To install
+Segment-Nielsen-DCR SDK is available through [CocoaPods](http://cocoapods.org). To install
 it, add the following line to your Podfile:
 
 ```ruby
@@ -89,4 +89,4 @@ SEGAnalyticsConfiguration *config = [SEGAnalyticsConfiguration configurationWith
 
 ## License
 
-Segment-Nielsen is available under the MIT license. See the LICENSE file for more info.
+Segment-Nielsen-DCR is available under the MIT license. See the LICENSE file for more info.
