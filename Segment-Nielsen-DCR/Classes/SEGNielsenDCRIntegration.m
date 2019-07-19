@@ -42,6 +42,16 @@ NSString *returnHasAdsStatus(NSDictionary *src, NSString *key)
     return @"0";
 }
 
+NSString *returnContentLength(NSDictionary *src, NSString *defaultKey)
+{
+    NSString *contentLength = [src valueForKey:defaultKey];
+    NSString *totalLength = [src valueForKey:@"total_length"];
+    if (contentLength) {
+        return contentLength;
+    }
+    return totalLength;
+}
+
 NSString *returnCustomAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
 {
     NSString *customKey = settings[@"assetIdPropertyName"];
@@ -108,7 +118,7 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
         @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
         @"airdate" : properties[@"airdate"] ?: @"",
-        @"length" : properties[@"total_length"] ?: @"",
+        @"length" : returnContentLength(properties, @"content_length"),
         @"crossId1" : options[@"crossId1"] ?: @"",
         @"crossId2" : options[@"crossId2"] ?: @""
     };
