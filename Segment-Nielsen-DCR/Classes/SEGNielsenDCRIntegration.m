@@ -42,14 +42,16 @@ NSString *returnHasAdsStatus(NSDictionary *src, NSString *key)
     return @"0";
 }
 
-NSString *returnContentLength(NSDictionary *src, NSString *defaultKey)
+NSString *returnContentLength(NSDictionary *src, NSString *defaultKey, NSDictionary *settings)
 {
-    NSString *contentLength = [src valueForKey:defaultKey];
-    NSString *totalLength = [src valueForKey:@"total_length"];
-    if (contentLength) {
-        return contentLength;
+    NSString *contentLengthKey = settings[@"contentLengthPropertyName"];
+    NSString *contentLength;
+    if (contentLengthKey) {
+        contentLength = [src valueForKey:contentLengthKey];
+    } else {
+       contentLength = [src valueForKey:@"total_length"];
     }
-    return totalLength;
+    return contentLength;
 }
 
 NSString *returnCustomAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
