@@ -1,5 +1,9 @@
 Change Log
 ==========
+Version 1.2.0 *(19th July, 2019)*
+-------------------------------------------
+* Adds functionality support setting custom length property ("contentLengthPropertyName") in Segment UI. This is mapped to Nielsen's length. If a property is not provided in the settings, Segment will default to Segment specced property, `total_length`. 
+
 Version 1.2.0 *(17th July, 2019)*
 -------------------------------------------
 * Adds functionality support setting custom assetid ("assetIdPropertyName") in Segment UI. This is used to override default property mapping for Segment property 'asset_id' to Nielsen 'assetid' when present.
