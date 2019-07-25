@@ -120,17 +120,17 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
         @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
         @"airdate" : properties[@"airdate"] ?: @"",
-        @"length" : returnContentLength(properties, @"content_length"),
+        @"length" : returnContentLength(properties, @"content_length", settings),
         @"crossId1" : options[@"crossId1"] ?: @"",
         @"crossId2" : options[@"crossId2"] ?: @""
     };
-    
+
     NSMutableDictionary *mutableContentMetada = [contentMetadata mutableCopy];
     if (settings[@"subbrandPropertyName"]){
         NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
         [mutableContentMetada setObject:subbrandValue forKey:@"subbrand"];
     }
-    
+
     if (settings[@"clientIdPropertyName"]){
         NSString *clientIdValue = properties[settings[@"clientIdPropertyName"]] ?: @"";
         [mutableContentMetada setObject:clientIdValue forKey:@"clientid"];
@@ -170,13 +170,13 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
         @"crossId2" : options[@"crossId2"] ?: @""
 
     };
-    
+
     NSMutableDictionary *mutableAdContentMetadata = [adContentMetadata mutableCopy];
     if (settings[@"subbrandPropertyName"]){
         NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
         [mutableAdContentMetadata setObject:subbrandValue forKey:@"subbrand"];
     }
-    
+
     if (settings[@"clientIdPropertyName"]){
         NSString *clientIdValue = properties[settings[@"clientIdPropertyName"]] ?: @"";
         [mutableAdContentMetadata setObject:clientIdValue forKey:@"clientid"];
