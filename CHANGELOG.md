@@ -1,8 +1,12 @@
 Change Log
 ==========
-Version 1.2.0 *(19th July, 2019)*
+Version 1.2.2 *(25th July, 2019)*
 -------------------------------------------
-* Adds functionality support setting custom length property ("contentLengthPropertyName") in Segment UI. This is mapped to Nielsen's length. If a property is not provided in the settings, Segment will default to Segment specced property, `total_length`. 
+* Fixes param values passed to `returnContentLength`.
+
+Version 1.2.1 *(19th July, 2019)*
+-------------------------------------------
+* Adds functionality support setting custom length property ("contentLengthPropertyName") in Segment UI. This is mapped to Nielsen's length. If a property is not provided in the settings, Segment will default to Segment specced property, `total_length`.
 
 Version 1.2.0 *(17th July, 2019)*
 -------------------------------------------
