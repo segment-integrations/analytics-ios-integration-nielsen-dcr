@@ -56,7 +56,20 @@ NSString *returnContentLength(NSDictionary *src, NSString *defaultKey, NSDiction
 
 NSString *returnCustomAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
 {
-    NSString *customKey = settings[@"assetIdPropertyName"];
+    NSString *customKey = settings[@"contentAssetIdPropertyName"];
+    NSString *value;
+    if (customKey){
+        value = [properties valueForKey:customKey];
+    } else {
+        value = [properties valueForKey:defaultKey];
+    }
+    value = value ? value : @"";
+    return value;
+}
+
+NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
+{
+    NSString *customKey = settings[@"adAssetIdPropertyName"];
     NSString *value;
     if (customKey){
         value = [properties valueForKey:customKey];
@@ -142,7 +155,7 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
 NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
 {
     NSDictionary *adMetadata = @{
-        @"assetid" : returnCustomAssetId(properties, @"asset_id", settings),
+        @"assetid" : returnCustomAdAssetId(properties, @"asset_id", settings),
         @"type" : properties[@"type"] ?: @"",
         @"title" : properties[@"title"] ?: @""
 
