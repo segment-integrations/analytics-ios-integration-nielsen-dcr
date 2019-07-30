@@ -54,9 +54,22 @@ NSString *returnContentLength(NSDictionary *src, NSString *defaultKey, NSDiction
     return contentLength;
 }
 
-NSString *returnCustomAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
+NSString *returnCustomContentAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
 {
-    NSString *customKey = settings[@"assetIdPropertyName"];
+    NSString *customKey = settings[@"contentAssetIdPropertyName"];
+    NSString *value;
+    if (customKey){
+        value = [properties valueForKey:customKey];
+    } else {
+        value = [properties valueForKey:defaultKey];
+    }
+    value = value ? value : @"";
+    return value;
+}
+
+NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
+{
+    NSString *customKey = settings[@"adAssetIdPropertyName"];
     NSString *value;
     if (customKey){
         value = [properties valueForKey:customKey];
@@ -111,7 +124,7 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
     NSDictionary *contentMetadata = @{
         @"pipmode" : options[@"pipmode"] ?: @"false",
         @"adloadtype" : returnAdLoadType(options, @"adLoadType"),
-        @"assetid" : returnCustomAssetId(properties, @"asset_id", settings),
+        @"assetid" : returnCustomContentAssetId(properties, @"asset_id", settings),
         @"type" : @"content",
         @"segB" : options[@"segB"] ?: @"",
         @"segC" : options[@"segC"] ?: @"",
@@ -142,7 +155,7 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
 NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
 {
     NSDictionary *adMetadata = @{
-        @"assetid" : returnCustomAssetId(properties, @"asset_id", settings),
+        @"assetid" : returnCustomAdAssetId(properties, @"asset_id", settings),
         @"type" : properties[@"type"] ?: @"",
         @"title" : properties[@"title"] ?: @""
 
@@ -154,7 +167,7 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
 {
     NSDictionary *adContentMetadata = @{
-        @"assetid" : returnCustomAssetId(properties, @"content_asset_id", settings),
+        @"assetid" : returnCustomContentAssetId(properties, @"content_asset_id", settings),
         @"pipmode" : options[@"pipmode"] ?: @"false",
         @"adloadtype" : returnAdLoadType(properties, @"load_type"),
         @"type" : @"content",
