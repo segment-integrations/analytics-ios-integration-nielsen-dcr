@@ -1,5 +1,10 @@
 Change Log
 ==========
+Version 1.2.3 *(25th July, 2019)*
+-------------------------------------------
+* Adds support for Nielsen's ad `assetId` to be  assigned using the setting: `adAssetIdPropertyName` and custom property mapping.
+* Changes naming convention of `assetIdPropertyName` to `contentAssetIdPropertyName` for custom content assetId mapping. 
+
 Version 1.2.2 *(25th July, 2019)*
 -------------------------------------------
 * Fixes param values passed to `returnContentLength`.
