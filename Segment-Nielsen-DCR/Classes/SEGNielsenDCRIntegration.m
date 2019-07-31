@@ -48,9 +48,12 @@ NSString *returnContentLength(NSDictionary *src, NSString *defaultKey, NSDiction
     NSString *contentLength;
     if (contentLengthKey) {
         contentLength = [src valueForKey:contentLengthKey];
-    } else {
+    } else if (src[@"total_length"]) {
        contentLength = [src valueForKey:@"total_length"];
+    } else {
+        contentLength = @"";
     }
+    
     return contentLength;
 }
 
@@ -60,10 +63,11 @@ NSString *returnCustomContentAssetId(NSDictionary *properties, NSString *default
     NSString *value;
     if (customKey){
         value = [properties valueForKey:customKey];
-    } else {
+    } else if (properties[defaultKey]) {
         value = [properties valueForKey:defaultKey];
+    } else {
+        value = @"";
     }
-    value = value ? value : @"";
     return value;
 }
 
@@ -73,10 +77,11 @@ NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, 
     NSString *value;
     if (customKey){
         value = [properties valueForKey:customKey];
-    } else {
+    } else if (properties[defaultKey])  {
         value = [properties valueForKey:defaultKey];
+    } else {
+        value = @"";
     }
-    value = value ? value : @"";
     return value;
 }
 
@@ -379,7 +384,8 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 
         // In case of ad `type` preroll, call `loadMetadata` with metadata values for content, followed by `loadMetadata` with ad (preroll) metadata
         if ([properties[@"type"] isEqualToString:@"pre-roll"]) {
-            NSDictionary *adContentMetadata = returnMappedAdContentProperties(properties, options, self.settings);
+            NSDictionary *contentProperties = [properties valueForKey:@"content"];
+            NSDictionary *adContentMetadata = returnMappedAdContentProperties(contentProperties, options, self.settings);
             [self.nielsen loadMetadata:adContentMetadata];
             SEGLog(@"[NielsenAppApi loadMetadata:%@]", adContentMetadata);
         }
