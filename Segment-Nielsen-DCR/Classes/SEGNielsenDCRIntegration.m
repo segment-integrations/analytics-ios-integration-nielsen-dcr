@@ -46,11 +46,14 @@ NSString *returnContentLength(NSDictionary *src, NSString *defaultKey, NSDiction
 {
     NSString *contentLengthKey = settings[@"contentLengthPropertyName"];
     NSString *contentLength;
-    if (contentLengthKey) {
+    if ([contentLengthKey length] > 0) {
         contentLength = [src valueForKey:contentLengthKey];
-    } else {
+    } else if (src[@"total_length"]) {
        contentLength = [src valueForKey:@"total_length"];
+    } else {
+        contentLength = @"";
     }
+    
     return contentLength;
 }
 
@@ -58,12 +61,13 @@ NSString *returnCustomContentAssetId(NSDictionary *properties, NSString *default
 {
     NSString *customKey = settings[@"contentAssetIdPropertyName"];
     NSString *value;
-    if (customKey){
+    if ([customKey length] > 0){
         value = [properties valueForKey:customKey];
-    } else {
+    } else if (properties[defaultKey]) {
         value = [properties valueForKey:defaultKey];
+    } else {
+        value = @"";
     }
-    value = value ? value : @"";
     return value;
 }
 
@@ -71,12 +75,13 @@ NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, 
 {
     NSString *customKey = settings[@"adAssetIdPropertyName"];
     NSString *value;
-    if (customKey){
+    if ([customKey length] > 0){
         value = [properties valueForKey:customKey];
-    } else {
+    } else if (properties[defaultKey])  {
         value = [properties valueForKey:defaultKey];
+    } else {
+        value = @"";
     }
-    value = value ? value : @"";
     return value;
 }
 
@@ -138,18 +143,18 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"crossId2" : options[@"crossId2"] ?: @""
     };
 
-    NSMutableDictionary *mutableContentMetada = [contentMetadata mutableCopy];
+    NSMutableDictionary *mutableContentMetadata = [contentMetadata mutableCopy];
     if (settings[@"subbrandPropertyName"]){
         NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
-        [mutableContentMetada setObject:subbrandValue forKey:@"subbrand"];
+        [mutableContentMetadata setObject:subbrandValue forKey:@"subbrand"];
     }
 
     if (settings[@"clientIdPropertyName"]){
         NSString *clientIdValue = properties[settings[@"clientIdPropertyName"]] ?: @"";
-        [mutableContentMetada setObject:clientIdValue forKey:@"clientid"];
+        [mutableContentMetadata setObject:clientIdValue forKey:@"clientid"];
     }
 
-    return coerceToString(mutableContentMetada);
+    return coerceToString(mutableContentMetadata);
 }
 
 NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
@@ -160,41 +165,14 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
         @"title" : properties[@"title"] ?: @""
 
     };
-    return coerceToString(adMetadata);
-}
+    
+    NSMutableDictionary *mutableAdMetadata = [adMetadata mutableCopy];
 
-// In case of ad type preroll, we need to map content metadata on ad events
-NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictionary *options, NSDictionary *settings)
-{
-    NSDictionary *adContentMetadata = @{
-        @"assetid" : returnCustomContentAssetId(properties, @"content_asset_id", settings),
-        @"pipmode" : options[@"pipmode"] ?: @"false",
-        @"adloadtype" : returnAdLoadType(properties, @"load_type"),
-        @"type" : @"content",
-        @"segB" : options[@"segB"] ?: @"",
-        @"segC" : options[@"segC"] ?: @"",
-        @"title" : properties[@"title"] ?: @"",
-        @"program" : properties[@"program"] ?: @"",
-        @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
-        @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
-        @"airdate" : properties[@"airdate"] ?: @"",
-        @"length" : properties[@"total_length"] ?: @"",
-        @"crossId1" : options[@"crossId1"] ?: @"",
-        @"crossId2" : options[@"crossId2"] ?: @""
-
-    };
-
-    NSMutableDictionary *mutableAdContentMetadata = [adContentMetadata mutableCopy];
-    if (settings[@"subbrandPropertyName"]){
-        NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
-        [mutableAdContentMetadata setObject:subbrandValue forKey:@"subbrand"];
+    if ([properties[@"type"] isEqualToString:@"pre-roll"]) {
+        [mutableAdMetadata setObject:@"preroll" forKey:@"type"];
     }
-
-    if (settings[@"clientIdPropertyName"]){
-        NSString *clientIdValue = properties[settings[@"clientIdPropertyName"]] ?: @"";
-        [mutableAdContentMetadata setObject:clientIdValue forKey:@"clientid"];
-    }
-    return coerceToString(mutableAdContentMetadata);
+    
+    return coerceToString(mutableAdMetadata);
 }
 
 #pragma mark - Integration
@@ -379,7 +357,8 @@ NSDictionary *returnMappedAdContentProperties(NSDictionary *properties, NSDictio
 
         // In case of ad `type` preroll, call `loadMetadata` with metadata values for content, followed by `loadMetadata` with ad (preroll) metadata
         if ([properties[@"type"] isEqualToString:@"pre-roll"]) {
-            NSDictionary *adContentMetadata = returnMappedAdContentProperties(properties, options, self.settings);
+            NSDictionary *contentProperties = [properties valueForKey:@"content"];
+            NSDictionary *adContentMetadata = returnMappedContentProperties(contentProperties, options, self.settings);
             [self.nielsen loadMetadata:adContentMetadata];
             SEGLog(@"[NielsenAppApi loadMetadata:%@]", adContentMetadata);
         }
