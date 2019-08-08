@@ -19,5 +19,7 @@
 
 
 - (instancetype)initWithSettings:(NSDictionary *)settings andNielsen:(NielsenAppApi *)nielsen;
+- (NSString *)optOutURL;
+- (void)userOptOutStatus:(NSString *)urlString;
 
 @end

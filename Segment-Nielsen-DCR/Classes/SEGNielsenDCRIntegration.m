@@ -329,6 +329,7 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
         return;
     }
 
+
 #pragma mark - Content Events
 
     if ([payload.event isEqualToString:@"Video Content Started"]) {
@@ -379,6 +380,23 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
         [self.nielsen stop];
         return;
     }
+}
+
+/**
+ @return Opt-out URL string from the Nielsen App API to display in a web view.
+ */
+-(NSString *)optOutURL
+{
+    return [self.nielsen optOutURL];
+}
+
+/**
+ @param urlString URL string from user's action to denote opt-out status for the Nielsen App API. Should be one of `nielsenappsdk://1` or `nielsenappsdk://0` for opt-out and opt-in, respectively
+ @seealso https://engineeringportal.nielsen.com/docs/DTVR_iOS_SDK#The_legacy_opt-out_method_works_as_follows:
+ */
+-(void)userOptOutStatus:(NSString *)urlString
+{
+    [self.nielsen userOptOut:urlString];
 }
 
 
