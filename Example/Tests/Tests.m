@@ -169,7 +169,9 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"airdate" : @"",
             @"length" : @"400",
             @"airdate" : @"",
-            @"crossId1" : @""
+            @"crossId1" : @"",
+            @"crossId2" : @"",
+            @"hasAds" : @"0"
         }];
     });
 
@@ -219,14 +221,17 @@ describe(@"SEGNielsenDCRIntegration", ^{
     it(@"tracks preroll Video Ad Started", ^{
         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Ad Started"
             properties:@{
-                @"content_asset_id" : @"934",
                 @"asset_id" : @"1231312",
                 @"pod_id" : @"43434234534",
                 @"type" : @"pre-roll",
-                @"total_length" : @110,
-                @"position" : @43,
-                @"publisher" : @"Adult Swim",
-                @"title" : @"Rick and Morty Ad"
+                @"title" : @"Rick and Morty Ad",
+                @"content" : @{
+                        @"asset_id" : @"934",
+                        @"total_length" : @110,
+                        @"position" : @43,
+                        @"publisher" : @"Adult Swim",
+                        @"title" : @"Rick and Morty Content"
+                }
             }
             context:@{}
             integrations:@{}];
@@ -234,7 +239,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
         [integration track:payload];
         [verify(mockNielsenAppApi) loadMetadata:@{
             @"type" : @"content",
-            @"title" : @"Rick and Morty Ad",
+            @"title" : @"Rick and Morty Content",
             @"assetid" : @"934",
             @"pipmode" : @"false",
             @"adloadtype" : @"1",
@@ -243,15 +248,17 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"segC" : @"",
             @"title" : @"",
             @"program" : @"",
-            @"isfullepisode" : @"sf",
+            @"isfullepisode" : @"n",
             @"airdate" : @"",
             @"length" : @"110",
-            @"crossId1" : @""
+            @"crossId1" : @"",
+            @"crossId2" :@"",
+            @"hasAds" : @"0"
         }];
 
         [verify(mockNielsenAppApi) loadMetadata:@{
             @"assetid" : @"1231312",
-            @"type" : @"pre-roll",
+            @"type" : @"preroll",
             @"title" : @"Rick and Morty Ad"
         }];
     });
@@ -271,7 +278,22 @@ describe(@"SEGNielsenDCRIntegration", ^{
         [integration track:payload];
         [verify(mockNielsenAppApi) stop];
     });
-
+    
+    
+    it(@"exposes Nielsen opt-out URL", ^{
+        [integration optOutURL];
+        [verify(mockNielsenAppApi) optOutURL];
+    });
+    
+    it(@"opts out Nielsen SDK", ^{
+        [integration userOptOutStatus:@"nielsenappsdk://1"];
+        [verify(mockNielsenAppApi) userOptOut:@"nielsenappsdk://1"];
+    });
+    
+    it(@"opts in Nielsen SDK", ^{
+        [integration userOptOutStatus:@"nielsenappsdk://0"];
+        [verify(mockNielsenAppApi) userOptOut:@"nielsenappsdk://0"];
+    });
 
 });
 

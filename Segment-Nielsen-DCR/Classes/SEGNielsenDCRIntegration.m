@@ -46,7 +46,8 @@ NSString *returnContentLength(NSDictionary *src, NSString *defaultKey, NSDiction
 {
     NSString *contentLengthKey = settings[@"contentLengthPropertyName"];
     NSString *contentLength;
-    if ([contentLengthKey length] > 0) {
+    NSString *customContentLength = src[contentLengthKey];
+    if ([contentLengthKey length] > 0 && customContentLength) {
         contentLength = [src valueForKey:contentLengthKey];
     } else if (src[@"total_length"]) {
        contentLength = [src valueForKey:@"total_length"];
@@ -61,7 +62,8 @@ NSString *returnCustomContentAssetId(NSDictionary *properties, NSString *default
 {
     NSString *customKey = settings[@"contentAssetIdPropertyName"];
     NSString *value;
-    if ([customKey length] > 0){
+    NSString *customContentAssetId = properties[customKey];
+    if ([customKey length] > 0 && customContentAssetId){
         value = [properties valueForKey:customKey];
     } else if (properties[defaultKey]) {
         value = [properties valueForKey:defaultKey];
@@ -75,7 +77,8 @@ NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, 
 {
     NSString *customKey = settings[@"adAssetIdPropertyName"];
     NSString *value;
-    if ([customKey length] > 0){
+    NSString *customAssetId = properties[customKey];
+    if ([customKey length] > 0 && customAssetId){
         value = [properties valueForKey:customKey];
     } else if (properties[defaultKey])  {
         value = [properties valueForKey:defaultKey];
@@ -329,6 +332,7 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
         return;
     }
 
+
 #pragma mark - Content Events
 
     if ([payload.event isEqualToString:@"Video Content Started"]) {
@@ -336,6 +340,8 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
         [self.nielsen loadMetadata:contentMetadata];
         SEGLog(@"[NielsenAppApi loadMetadata:%@]", contentMetadata);
         [self startPlayheadTimer:payload];
+        NSLog(@"nielsen optout %@", [self.nielsen optOutURL]);
+
         return;
     }
 
@@ -379,6 +385,23 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
         [self.nielsen stop];
         return;
     }
+}
+
+/**
+ @return Opt-out URL string from the Nielsen App API to display in a web view.
+ */
+-(NSString *)optOutURL
+{
+    return [self.nielsen optOutURL];
+}
+
+/**
+ @param urlString URL string from user's action to denote opt-out status for the Nielsen App API. Should be one of `nielsenappsdk://1` or `nielsenappsdk://0` for opt-out and opt-in, respectively
+ @seealso https://engineeringportal.nielsen.com/docs/DTVR_iOS_SDK#The_legacy_opt-out_method_works_as_follows:
+ */
+-(void)userOptOutStatus:(NSString *)urlString
+{
+    [self.nielsen userOptOut:urlString];
 }
 
 
