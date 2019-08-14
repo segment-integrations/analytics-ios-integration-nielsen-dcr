@@ -1,9 +1,14 @@
 Change Log
 ==========
+Version 1.2.5 *(14th August, 2019)*
+-------------------------------------------
+* Fixes a bug in helper functions setting nil values in contentMetadata.
+* Adds support for retrieving `optOutURL`.
+
 Version 1.2.4 *(5th August, 2019)*
 -------------------------------------------
 * Fixes a bug with `content_length` helper function
-* Updates pre-roll ad loadMetadata. Previously we were retrieving properties for content on  pre-roll ads from `properties.content` to adhere to the Segment video spec. 
+* Updates pre-roll ad loadMetadata. Previously we were retrieving properties for content on  pre-roll ads from `properties.content` to adhere to the Segment video spec.
 
 Version 1.2.3 *(25th July, 2019)*
 -------------------------------------------
