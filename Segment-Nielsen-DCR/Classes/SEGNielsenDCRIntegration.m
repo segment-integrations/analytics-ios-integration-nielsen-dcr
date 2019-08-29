@@ -88,6 +88,20 @@ NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, 
     return value;
 }
 
+NSString *returnAirdate(NSDictionary *properties, NSString *defaultKey)
+{
+        NSString *dateSTR = [properties valueForKey:defaultKey];
+        NSISO8601DateFormatter *formatter = [[NSISO8601DateFormatter alloc] init];
+        NSDate *currentDate = [formatter dateFromString:dateSTR];
+        NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setTimeZone:timeZone];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *localDateString = [dateFormatter stringFromDate:currentDate];
+        return localDateString;
+}
+
 long long returnPlayheadPosition(SEGTrackPayload *payload)
 {
     long long playheadPosition = 0;
@@ -140,12 +154,13 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
         @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
-        @"airdate" : properties[@"airdate"] ?: @"",
+        @"airdate" : returnAirdate(properties, @"airdate"),
         @"length" : returnContentLength(properties, @"content_length", settings),
         @"crossId1" : options[@"crossId1"] ?: @"",
         @"crossId2" : options[@"crossId2"] ?: @""
     };
 
+//     @"airdate" : properties[@"airdate"] ?: @"",
     NSMutableDictionary *mutableContentMetadata = [contentMetadata mutableCopy];
     if (settings[@"subbrandPropertyName"]){
         NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
