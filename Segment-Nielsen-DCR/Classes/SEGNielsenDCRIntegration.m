@@ -175,6 +175,14 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
         [mutableAdMetadata setObject:@"preroll" forKey:@"type"];
     }
     
+    if ([properties[@"type"] isEqualToString:@"mid-roll"]) {
+        [mutableAdMetadata setObject:@"midroll" forKey:@"type"];
+    }
+    
+    if ([properties[@"type"] isEqualToString:@"post-roll"]) {
+        [mutableAdMetadata setObject:@"postroll" forKey:@"type"];
+    }
+    
     return coerceToString(mutableAdMetadata);
 }
 
