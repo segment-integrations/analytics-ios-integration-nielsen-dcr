@@ -1,5 +1,10 @@
 Change Log
 ==========
+Version 1.2.6 *(30th August, 2019)*
+-------------------------------------------
+* Adds a helper functions `returnAirdate` that will convert a date passed in ISO 8601 format or in format 2019-30-08 to Nielsen yyyyMMdd HH:MM:SS `airdate` format.
+* Removes hyphens for ad `type` of "post-roll" and "mid-roll"
+
 Version 1.2.5 *(14th August, 2019)*
 -------------------------------------------
 * Fixes a bug in helper functions setting nil values in contentMetadata.
