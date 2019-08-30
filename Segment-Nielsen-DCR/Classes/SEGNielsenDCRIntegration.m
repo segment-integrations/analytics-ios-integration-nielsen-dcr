@@ -113,7 +113,7 @@ NSString *returnAirdate(NSDictionary *properties, NSString *defaultKey)
         NSDateFormatter *nielsenDateFormatter = [[NSDateFormatter alloc] init];
         NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
         [nielsenDateFormatter setTimeZone:timeZone];
-        [nielsenDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [nielsenDateFormatter setDateFormat:@"yyyyMMdd HH:mm:ss"];
         NSString *nielsenDateString = [nielsenDateFormatter stringFromDate:date];
     
         if ([nielsenDateString length] > 0) {
