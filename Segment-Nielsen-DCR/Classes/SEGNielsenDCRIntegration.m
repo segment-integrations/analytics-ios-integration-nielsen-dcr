@@ -88,6 +88,43 @@ NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, 
     return value;
 }
 
+NSString *returnAirdate(NSDictionary *properties, NSString *defaultKey)
+{
+        NSString *dateSTR = [properties valueForKey:defaultKey];
+        NSArray *dateArrayISO = [dateSTR componentsSeparatedByString:@"T"];
+        NSArray *dateArraySimpleDate = [dateSTR componentsSeparatedByString:@"-"];
+        NSDate *date;
+        //Convert the string date if it was passed in ISO 8601 format ie. 2019-08-30T21:00:00Z
+        if ([dateArrayISO count] > 1) {
+            NSISO8601DateFormatter *ISODateFormatter = [[NSISO8601DateFormatter alloc] init];
+            date = [ISODateFormatter dateFromString:dateSTR];
+        }
+    
+        //Convert the string date if it was passed in simple date format ie. 2019-08-30
+        if ([dateArraySimpleDate count] > 2 && [dateSTR length] == 10) {
+            NSDateFormatter *simpleDateFormatter = [[NSDateFormatter alloc] init];
+            [simpleDateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+            [simpleDateFormatter setTimeZone:timeZone];
+            date = [simpleDateFormatter dateFromString:dateSTR];
+        }
+    
+        //Manipulate the date to Nielsen format
+        NSDateFormatter *nielsenDateFormatter = [[NSDateFormatter alloc] init];
+        NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [nielsenDateFormatter setTimeZone:timeZone];
+        [nielsenDateFormatter setDateFormat:@"yyyyMMdd HH:mm:ss"];
+        NSString *nielsenDateString = [nielsenDateFormatter stringFromDate:date];
+    
+        if ([nielsenDateString length] > 0) {
+            return nielsenDateString;
+        } else if ([dateSTR length] > 0) {
+            return dateSTR;
+        } else {
+            return @"";
+        }
+}
+
 long long returnPlayheadPosition(SEGTrackPayload *payload)
 {
     long long playheadPosition = 0;
@@ -140,7 +177,7 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"program" : properties[@"program"] ?: @"",
         @"isfullepisode" : returnFullEpisodeStatus(properties, @"full_episode"),
         @"hasAds" : returnHasAdsStatus(options, @"hasAds"),
-        @"airdate" : properties[@"airdate"] ?: @"",
+        @"airdate" : returnAirdate(properties, @"airdate"),
         @"length" : returnContentLength(properties, @"content_length", settings),
         @"crossId1" : options[@"crossId1"] ?: @"",
         @"crossId2" : options[@"crossId2"] ?: @""
@@ -173,6 +210,14 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 
     if ([properties[@"type"] isEqualToString:@"pre-roll"]) {
         [mutableAdMetadata setObject:@"preroll" forKey:@"type"];
+    }
+    
+    if ([properties[@"type"] isEqualToString:@"mid-roll"]) {
+        [mutableAdMetadata setObject:@"midroll" forKey:@"type"];
+    }
+    
+    if ([properties[@"type"] isEqualToString:@"post-roll"]) {
+        [mutableAdMetadata setObject:@"postroll" forKey:@"type"];
     }
     
     return coerceToString(mutableAdMetadata);
@@ -340,8 +385,6 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
         [self.nielsen loadMetadata:contentMetadata];
         SEGLog(@"[NielsenAppApi loadMetadata:%@]", contentMetadata);
         [self startPlayheadTimer:payload];
-        NSLog(@"nielsen optout %@", [self.nielsen optOutURL]);
-
         return;
     }
 
