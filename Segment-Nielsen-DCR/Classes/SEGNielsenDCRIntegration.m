@@ -91,15 +91,38 @@ NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, 
 NSString *returnAirdate(NSDictionary *properties, NSString *defaultKey)
 {
         NSString *dateSTR = [properties valueForKey:defaultKey];
-        NSISO8601DateFormatter *formatter = [[NSISO8601DateFormatter alloc] init];
-        NSDate *currentDate = [formatter dateFromString:dateSTR];
+        NSArray *dateArrayISO = [dateSTR componentsSeparatedByString:@"T"];
+        NSArray *dateArraySimpleDate = [dateSTR componentsSeparatedByString:@"-"];
+        NSDate *date;
+        //Convert the string date if it was passed in ISO 8601 format ie. 2019-08-30T21:00:00Z
+        if ([dateArrayISO count] > 1) {
+            NSISO8601DateFormatter *ISODateFormatter = [[NSISO8601DateFormatter alloc] init];
+            date = [ISODateFormatter dateFromString:dateSTR];
+        }
+    
+        //Convert the string date if it was passed in simple date format ie. 2019-08-30
+        if ([dateArraySimpleDate count] > 2 && [dateSTR length] == 10) {
+            NSDateFormatter *simpleDateFormatter = [[NSDateFormatter alloc] init];
+            [simpleDateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+            [simpleDateFormatter setTimeZone:timeZone];
+            date = [simpleDateFormatter dateFromString:dateSTR];
+        }
+    
+        //Manipulate the date to Nielsen format
+        NSDateFormatter *nielsenDateFormatter = [[NSDateFormatter alloc] init];
         NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
-
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setTimeZone:timeZone];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSString *localDateString = [dateFormatter stringFromDate:currentDate];
-        return localDateString;
+        [nielsenDateFormatter setTimeZone:timeZone];
+        [nielsenDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *nielsenDateString = [nielsenDateFormatter stringFromDate:date];
+    
+        if ([nielsenDateString length] > 0) {
+            return nielsenDateString;
+        } else if ([dateSTR length] > 0) {
+            return dateSTR;
+        } else {
+            return @"";
+        }
 }
 
 long long returnPlayheadPosition(SEGTrackPayload *payload)
@@ -160,7 +183,6 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
         @"crossId2" : options[@"crossId2"] ?: @""
     };
 
-//     @"airdate" : properties[@"airdate"] ?: @"",
     NSMutableDictionary *mutableContentMetadata = [contentMetadata mutableCopy];
     if (settings[@"subbrandPropertyName"]){
         NSString *subbrandValue = properties[settings[@"subbrandPropertyName"]] ?: @"";
@@ -363,8 +385,6 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
         [self.nielsen loadMetadata:contentMetadata];
         SEGLog(@"[NielsenAppApi loadMetadata:%@]", contentMetadata);
         [self startPlayheadTimer:payload];
-        NSLog(@"nielsen optout %@", [self.nielsen optOutURL]);
-
         return;
     }
 
