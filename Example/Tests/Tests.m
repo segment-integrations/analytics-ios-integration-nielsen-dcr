@@ -139,7 +139,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
         [(NielsenAppApi *)verify(mockNielsenAppApi) end];
     });
 
-    it(@"tracks Video Content Started", ^{
+    it(@"tracks Video Content Started with ISO airdate", ^{
         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Content Started" properties:@{
             @"asset_id" : @"3543",
             @"pod_id" : @"65462",
@@ -152,7 +152,116 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"full_episode" : @YES,
             @"publisher" : @"Turner Broadcasting Network",
             @"position" : @22,
-            @"channel" : @"Cartoon Network"
+            @"channel" : @"Cartoon Network",
+            @"airdate": @"2005-06-27T21:00:00Z"
+        } context:@{}
+            integrations:@{}];
+        [integration track:payload];
+        [verify(mockNielsenAppApi) loadMetadata:@{
+            @"pipmode" : @"false",
+            @"adloadtype" : @"1",
+            @"assetid" : @"3543",
+            @"type" : @"content",
+            @"segB" : @"",
+            @"segC" : @"",
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"program" : @"Rick and Morty",
+            @"isfullepisode" : @"y",
+            @"airdate" : @"2005-06-27 21:00:00",
+            @"length" : @"400",
+            @"crossId1" : @"",
+            @"crossId2" : @"",
+            @"hasAds" : @"0"
+        }];
+    });
+
+    it(@"tracks Video Content Started with simple airdate", ^{
+        SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Content Started" properties:@{
+            @"asset_id" : @"3543",
+            @"pod_id" : @"65462",
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"season" : @"2",
+            @"episode" : @"7",
+            @"genre" : @"cartoon",
+            @"program" : @"Rick and Morty",
+            @"total_length" : @400,
+            @"full_episode" : @YES,
+            @"publisher" : @"Turner Broadcasting Network",
+            @"position" : @22,
+            @"channel" : @"Cartoon Network",
+            @"airdate": @"2005-06-27"
+        } context:@{}
+            integrations:@{}];
+        [integration track:payload];
+        [verify(mockNielsenAppApi) loadMetadata:@{
+            @"pipmode" : @"false",
+            @"adloadtype" : @"1",
+            @"assetid" : @"3543",
+            @"type" : @"content",
+            @"segB" : @"",
+            @"segC" : @"",
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"program" : @"Rick and Morty",
+            @"isfullepisode" : @"y",
+            @"airdate" : @"2005-06-27 00:00:00",
+            @"length" : @"400",
+            @"crossId1" : @"",
+            @"crossId2" : @"",
+            @"hasAds" : @"0"
+        }];
+    });
+
+    it(@"tracks Video Content Started with non-date string airdate", ^{
+        SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Content Started" properties:@{
+            @"asset_id" : @"3543",
+            @"pod_id" : @"65462",
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"season" : @"2",
+            @"episode" : @"7",
+            @"genre" : @"cartoon",
+            @"program" : @"Rick and Morty",
+            @"total_length" : @400,
+            @"full_episode" : @YES,
+            @"publisher" : @"Turner Broadcasting Network",
+            @"position" : @22,
+            @"channel" : @"Cartoon Network",
+            @"airdate": @"this is not a valid date"
+        } context:@{}
+            integrations:@{}];
+        [integration track:payload];
+        [verify(mockNielsenAppApi) loadMetadata:@{
+            @"pipmode" : @"false",
+            @"adloadtype" : @"1",
+            @"assetid" : @"3543",
+            @"type" : @"content",
+            @"segB" : @"",
+            @"segC" : @"",
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"program" : @"Rick and Morty",
+            @"isfullepisode" : @"y",
+            @"airdate" : @"this is not a valid date",
+            @"length" : @"400",
+            @"crossId1" : @"",
+            @"crossId2" : @"",
+            @"hasAds" : @"0"
+        }];
+    });
+
+    it(@"tracks Video Content Started with no airdate", ^{
+        SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Content Started" properties:@{
+            @"asset_id" : @"3543",
+            @"pod_id" : @"65462",
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"season" : @"2",
+            @"episode" : @"7",
+            @"genre" : @"cartoon",
+            @"program" : @"Rick and Morty",
+            @"total_length" : @400,
+            @"full_episode" : @YES,
+            @"publisher" : @"Turner Broadcasting Network",
+            @"position" : @22,
+            @"channel" : @"Cartoon Network",
+            @"airdate": @""
         } context:@{}
             integrations:@{}];
         [integration track:payload];
@@ -168,7 +277,6 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"isfullepisode" : @"y",
             @"airdate" : @"",
             @"length" : @"400",
-            @"airdate" : @"",
             @"crossId1" : @"",
             @"crossId2" : @"",
             @"hasAds" : @"0"
@@ -213,7 +321,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
         [integration track:payload];
         [verify(mockNielsenAppApi) loadMetadata:@{
             @"assetid" : @"1231312",
-            @"type" : @"mid-roll",
+            @"type" : @"midroll",
             @"title" : @"Rick and Morty Ad"
         }];
     });
@@ -278,18 +386,18 @@ describe(@"SEGNielsenDCRIntegration", ^{
         [integration track:payload];
         [verify(mockNielsenAppApi) stop];
     });
-    
-    
+
+
     it(@"exposes Nielsen opt-out URL", ^{
         [integration optOutURL];
         [verify(mockNielsenAppApi) optOutURL];
     });
-    
+
     it(@"opts out Nielsen SDK", ^{
         [integration userOptOutStatus:@"nielsenappsdk://1"];
         [verify(mockNielsenAppApi) userOptOut:@"nielsenappsdk://1"];
     });
-    
+
     it(@"opts in Nielsen SDK", ^{
         [integration userOptOutStatus:@"nielsenappsdk://0"];
         [verify(mockNielsenAppApi) userOptOut:@"nielsenappsdk://0"];
