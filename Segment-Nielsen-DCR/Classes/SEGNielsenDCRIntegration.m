@@ -29,8 +29,6 @@ NSString *returnAdLoadType(NSDictionary *options, NSDictionary *properties)
     NSString *value;
     if ([options valueForKey:@"adLoadType"]){
         value = [options valueForKey:@"adLoadType"];
-    } else if ([options valueForKey:@"loadType"]) {
-        value = [options valueForKey:@"loadType"];
     } else if ([properties valueForKey:@"loadType"]){
         value = [properties valueForKey:@"loadType"];
     }
