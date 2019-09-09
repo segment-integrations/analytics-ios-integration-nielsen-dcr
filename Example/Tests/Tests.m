@@ -283,6 +283,44 @@ describe(@"SEGNielsenDCRIntegration", ^{
         }];
     });
 
+    it(@"tracks Video Content Started with loadType in properties", ^{
+        SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Content Started" properties:@{
+            @"asset_id" : @"3543",
+            @"pod_id" : @"65462",
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"season" : @"2",
+            @"episode" : @"7",
+            @"genre" : @"cartoon",
+            @"program" : @"Rick and Morty",
+            @"total_length" : @400,
+            @"full_episode" : @YES,
+            @"publisher" : @"Turner Broadcasting Network",
+            @"position" : @22,
+            @"channel" : @"Cartoon Network",
+            @"airdate": @"",
+            @"loadType": @"dynamic"
+        } context:@{}
+            integrations:@{}];
+        [integration track:payload];
+        [verify(mockNielsenAppApi) loadMetadata:@{
+            @"pipmode" : @"false",
+            @"adloadtype" : @"2",
+            @"assetid" : @"3543",
+            @"type" : @"content",
+            @"segB" : @"",
+            @"segC" : @"",
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"program" : @"Rick and Morty",
+            @"isfullepisode" : @"y",
+            @"airdate" : @"",
+            @"length" : @"400",
+            @"crossId1" : @"",
+            @"crossId2" : @"",
+            @"hasAds" : @"0"
+        }];
+    });
+
+
     it(@"tracks Video Content Completed", ^{
         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Content Completed" properties:@{
             @"asset_id" : @"3543",

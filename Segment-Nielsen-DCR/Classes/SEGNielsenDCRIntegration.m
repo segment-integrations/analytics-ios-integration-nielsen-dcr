@@ -24,9 +24,15 @@ NSString *returnFullEpisodeStatus(NSDictionary *src, NSString *key)
 }
 
 
-NSString *returnAdLoadType(NSDictionary *src, NSString *key)
+NSString *returnAdLoadType(NSDictionary *options, NSDictionary *properties)
 {
-    NSString *value = [src valueForKey:key];
+    NSString *value;
+    if ([options valueForKey:@"adLoadType"]){
+        value = [options valueForKey:@"adLoadType"];
+    } else if ([properties valueForKey:@"loadType"]){
+        value = [properties valueForKey:@"loadType"];
+    }
+    
     if ([value isEqualToString:@"dynamic"]) {
         return @"2";
     }
@@ -168,7 +174,7 @@ NSDictionary *returnMappedContentProperties(NSDictionary *properties, NSDictiona
 {
     NSDictionary *contentMetadata = @{
         @"pipmode" : options[@"pipmode"] ?: @"false",
-        @"adloadtype" : returnAdLoadType(options, @"adLoadType"),
+        @"adloadtype" : returnAdLoadType(options, properties),
         @"assetid" : returnCustomContentAssetId(properties, @"asset_id", settings),
         @"type" : @"content",
         @"segB" : options[@"segB"] ?: @"",
