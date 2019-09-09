@@ -1,5 +1,9 @@
 Change Log
 ==========
+Version 1.2.7 *(9th September, 2019)*
+-------------------------------------------
+* Updates `returnAdLoadType` helper method to check for a load type in `properties.loadType`. Will fallback to `adLoadType` in integrations specific options. 
+
 Version 1.2.6 *(30th August, 2019)*
 -------------------------------------------
 * Adds a helper functions `returnAirdate` that will convert a date passed in ISO 8601 format or in format 2019-30-08 to Nielsen yyyyMMdd HH:MM:SS `airdate` format.
