@@ -1,8 +1,12 @@
 Change Log
 ==========
+Version 1.2.8 *(17th September, 2019)*
+-------------------------------------------
+* Updates `returnAdLoadType` helper method to check for a load type in `properties.load_type`.
+
 Version 1.2.7 *(9th September, 2019)*
 -------------------------------------------
-* Updates `returnAdLoadType` helper method to check for a load type in `properties.loadType`. Will fallback to `adLoadType` in integrations specific options. 
+* Updates `returnAdLoadType` helper method to check for a load type in `properties.loadType`. Will fallback to `adLoadType` in integrations specific options.
 
 Version 1.2.6 *(30th August, 2019)*
 -------------------------------------------

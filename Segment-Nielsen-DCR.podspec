@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Segment-Nielsen-DCR'
-  s.version          = '1.2.7'
+  s.version          = '1.2.8'
   s.summary          = "Nielsen DCR Integration for Segment's analytics-ios library."
 
   s.description      = <<-DESC
