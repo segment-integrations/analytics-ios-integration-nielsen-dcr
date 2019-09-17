@@ -31,6 +31,8 @@ NSString *returnAdLoadType(NSDictionary *options, NSDictionary *properties)
         value = [options valueForKey:@"adLoadType"];
     } else if ([properties valueForKey:@"loadType"]){
         value = [properties valueForKey:@"loadType"];
+    } else if ([properties valueForKey:@"load_type"]){
+        value = [properties valueForKey:@"load_type"];
     }
     
     if ([value isEqualToString:@"dynamic"]) {
