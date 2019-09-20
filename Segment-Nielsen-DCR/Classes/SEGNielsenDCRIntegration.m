@@ -196,19 +196,13 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 
         NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
         NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
-        NSString *sfCode;
-
-        if (settings[@"sfCode"]) {
-            sfCode = @"dcr";
-        } else {
-            sfCode = @"dcr-cert";
-        }
 
         NSMutableDictionary *appInformation = [[NSMutableDictionary alloc] initWithDictionary: @{
             @"appid" : settings[@"appId"] ?: @"",
             @"appname" : appName ?: @"",
             @"appversion" : appVersion ?: @"",
-            @"sfcode" : sfCode
+            // hard-coding sfcode to "dcr" per request from Nielsen's support team
+            @"sfcode" : @"dcr";
         }];
 
         if ([settings[@"nolDevDebug"] boolValue]) {
