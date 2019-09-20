@@ -21,7 +21,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"appid" : @"TXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
             @"appname" : @"Test",
             @"appversion" : @"0.1",
-            @"sfcode" : @"dcr-cert"
+            @"sfcode" : @"dcr"
         };
 
 
