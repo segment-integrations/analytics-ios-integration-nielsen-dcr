@@ -4,7 +4,7 @@ PODS:
   - OCHamcrest (6.1.1)
   - OCMockito (4.1.0):
     - OCHamcrest (~> 6.0)
-  - Segment-Nielsen-DCR (1.1.2):
+  - Segment-Nielsen-DCR (1.2.8):
     - Analytics (~> 3.6)
   - Specta (1.0.6)
 
@@ -31,9 +31,9 @@ SPEC CHECKSUMS:
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
   OCHamcrest: 363e1bf738c3e8a94abe7c2c415f70d671adde38
   OCMockito: bceefcd365252bcdf8b59c1b2bd23890805fc0d8
-  Segment-Nielsen-DCR: 90eadf03d4de5d499cbc604abaab8d0da8ad4fd1
+  Segment-Nielsen-DCR: 2265f705e6ba9112d228a36d380f964ce4578979
   Specta: f506f3a8361de16bc0dcf3b17b75e269072ba465
 
 PODFILE CHECKSUM: e793c123c1317f200d9e9259817fe1554d7e08ed
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.7.5
