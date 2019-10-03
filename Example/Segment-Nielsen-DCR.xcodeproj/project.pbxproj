@@ -402,10 +402,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Segment-Nielsen-DCR_Example/Pods-Segment-Nielsen-DCR_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework",
+				"${PODS_ROOT}/NielsenAppSDK/NielsenAppApi.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Analytics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NielsenAppApi.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
