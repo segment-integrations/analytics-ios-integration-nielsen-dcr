@@ -139,7 +139,7 @@ long long returnPlayheadPosition(SEGTrackPayload *payload)
 
     NSDictionary *properties = payload.properties;
     // if livestream, you need to send current UTC timestamp
-    if ([properties[@"type"] isEqualToString:@"content"] && [properties[@"livestream"] isEqual:@YES]) {
+    if ([properties[@"livestream"] isEqual:@YES]) {
         long long position = 0;
         position = [properties[@"position"] longLongValue];
         long long currentTime = [[NSDate date] timeIntervalSince1970];
@@ -209,7 +209,7 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 {
     NSDictionary *adMetadata = @{
         @"assetid" : returnCustomAdAssetId(properties, @"asset_id", settings),
-        @"type" : properties[@"type"] ?: @"",
+        @"type" : properties[@"type"] ?: @"ad",
         @"title" : properties[@"title"] ?: @""
 
     };
@@ -403,7 +403,7 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 
     if ([payload.event isEqualToString:@"Video Content Completed"]) {
         [self stopPlayheadTimer:payload];
-        [self.nielsen end];
+        [self.nielsen stop];
         return;
     }
 
