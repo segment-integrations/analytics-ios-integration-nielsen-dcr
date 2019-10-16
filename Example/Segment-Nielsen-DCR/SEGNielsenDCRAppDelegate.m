@@ -16,7 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    SEGAnalyticsConfiguration *config = [SEGAnalyticsConfiguration configurationWithWriteKey:@"YOUR_WRITE_KEY_HERE"];
+    SEGAnalyticsConfiguration *config = [SEGAnalyticsConfiguration configurationWithWriteKey:@"sQ2TwsXLgHmsHtK1pI4uf0cRfE7bR9a7"];
     [config use:[SEGNielsenDCRIntegrationFactory instance]];
     [SEGAnalytics setupWithConfiguration:config];
     [[SEGAnalytics sharedAnalytics] track:@"Video Playback Started"];

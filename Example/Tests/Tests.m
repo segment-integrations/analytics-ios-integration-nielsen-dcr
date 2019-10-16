@@ -80,30 +80,99 @@ describe(@"SEGNielsenDCRIntegration", ^{
         } context:@{}
             integrations:@{}];
 
-
         [integration track:payload];
-
         [verify(mockNielsenAppApi) play:@{
             @"channelName" : @"defaultChannelName",
             @"mediaURL" : @""
         }];
     });
 
+     it(@"tracks Video Playback Resumed", ^{
+         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Resumed" properties:@{
+            @"content_asset_id" : @"1234",
+            @"ad_type" : @"pre-roll",
+            @"video_player" : @"youtube",
+            @"position" : @1
+         } context:@{}
+            integrations:@{}];
+
+    [integration track:payload];
+         [verify(mockNielsenAppApi) play:@{
+             @"channelName" : @"defaultChannelName",
+             @"mediaURL" : @""
+         }];
+     });
+
+     it(@"tracks Video Playback Seek Started", ^{
+         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Seek Started" properties:@{
+            @"content_asset_id" : @"1234",
+            @"ad_type" : @"pre-roll",
+            @"video_player" : @"youtube",
+            @"position" : @1
+         } context:@{}
+            integrations:@{}];
+
+         [integration track:payload];
+         [verify(mockNielsenAppApi) stop];
+     });
+
+     it(@"tracks Video Playback Buffer Started", ^{
+         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Buffer Started" properties:@{
+            @"content_asset_id" : @"1234",
+            @"ad_type" : @"pre-roll",
+            @"video_player" : @"youtube",
+            @"position" : @1
+         } context:@{}
+            integrations:@{}];
+
+         [integration track:payload];
+         [verify(mockNielsenAppApi) stop];
+     });
+
     it(@"tracks Video Playback Paused", ^{
         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Paused" properties:@{
-            @"content_asset_id" : @"7890",
-            @"ad_type" : @"mid-roll",
-            @"video_player" : @"vimeo",
-            @"position" : @30,
-            @"sound" : @100,
-            @"full_screen" : @YES,
-            @"bitrate" : @50
-        }
-            context:@{}
-            integrations:@{}];
+           @"content_asset_id" : @"1234",
+           @"ad_type" : @"pre-roll",
+           @"video_player" : @"youtube",
+           @"position" : @1
+        } context:@{}
+           integrations:@{}];
+
         [integration track:payload];
         [verify(mockNielsenAppApi) stop];
     });
+
+     it(@"tracks Video Playback Seek Completed", ^{
+         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Seek Completed" properties:@{
+            @"content_asset_id" : @"1234",
+            @"ad_type" : @"pre-roll",
+            @"video_player" : @"youtube",
+            @"position" : @1
+         } context:@{}
+            integrations:@{}];
+
+         [integration track:payload];
+         [verify(mockNielsenAppApi) play:@{
+             @"channelName" : @"defaultChannelName",
+             @"mediaURL" : @""
+         }];
+     });
+
+     it(@"tracks Video Playback Buffer Completed", ^{
+         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Buffer Completed" properties:@{
+            @"content_asset_id" : @"1234",
+            @"ad_type" : @"pre-roll",
+            @"video_player" : @"youtube",
+            @"position" : @1
+         } context:@{}
+            integrations:@{}];
+
+         [integration track:payload];
+         [verify(mockNielsenAppApi) play:@{
+             @"channelName" : @"defaultChannelName",
+             @"mediaURL" : @""
+         }];
+     });
 
     it(@"tracks Video Playback Interrupted", ^{
         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Interrupted" properties:@{
@@ -119,7 +188,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
             integrations:@{}];
 
         [integration track:payload];
-        [verify(mockNielsenAppApi) stop];
+        [(NielsenAppApi *)verify(mockNielsenAppApi) end];
     });
 
     it(@"tracks Video Playback Completed", ^{
@@ -376,7 +445,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
             integrations:@{}];
 
         [integration track:payload];
-        [(NielsenAppApi *)verify(mockNielsenAppApi) end];
+        [(NielsenAppApi *)verify(mockNielsenAppApi) stop];
     });
 
     it(@"tracks Video Ad Started", ^{
