@@ -1,5 +1,13 @@
 Change Log
 ==========
+
+Version 1.3.0 *(18th October, 2019)*
+-------------------------------------------
+* [DEST-1241]
+* Supports playback events "Video Playback Seek Started", "Video Playback   Buffer Started" and "Video Playback Buffer Completed".
+* sfCode setting hard-coded to "dcr" per Nielsen request.
+* Timer supports livestream offset as value of "position" property.
+
 Version 1.2.8 *(17th September, 2019)*
 -------------------------------------------
 * Updates `returnAdLoadType` helper method to check for a load type in `properties.load_type`.
