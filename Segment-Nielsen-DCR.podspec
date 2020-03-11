@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/segment'
 
   s.ios.deployment_target = '8.0'
+  s.tvos.deployment_target = '8.0'
 
   s.preserve_paths = 'Segment-Nielsen-DCR/Classes/**/*'
 
