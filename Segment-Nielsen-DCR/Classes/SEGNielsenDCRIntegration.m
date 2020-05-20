@@ -133,9 +133,10 @@ NSString *returnAirdate(NSDictionary *properties, NSString *defaultKey)
         }
 }
 
-long long returnPlayheadPosition(SEGTrackPayload *payload)
+long long returnPlayheadPosition(SEGTrackPayload *payload, NSDictionary *settings)
 {
     long long playheadPosition = 0;
+    
 
     NSDictionary *properties = payload.properties;
     // if livestream, you need to send current UTC timestamp
@@ -143,8 +144,13 @@ long long returnPlayheadPosition(SEGTrackPayload *payload)
         long long position = 0;
         position = [properties[@"position"] longLongValue];
         long long currentTime = [[NSDate date] timeIntervalSince1970];
-        // for livestream, properties.position is a negative integer representing offset in seconds from current time
-        playheadPosition = currentTime + position;
+        if ([settings[@"sendCurrentTimeLivestream"] isEqual:@YES]){
+            //for livestream, if this setting is enabled just send the curent time
+            playheadPosition = currentTime;
+        } else {
+            //for livestream, properties.position is a negative integer representing offset in seconds from current time
+            playheadPosition = currentTime + position;
+        }
     } else if (properties[@"position"]) {
         // if position is passed in we should override the state of the counter with the explicit position given from the customer
         playheadPosition = [properties[@"position"] longLongValue];
@@ -285,9 +291,10 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 
 - (void)startPlayheadTimer:(SEGTrackPayload *)payload
 {
+    NSDictionary *settings = self.settings;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.playheadTimer == nil) {
-            self.startingPlayheadPosition = returnPlayheadPosition(payload);
+            self.startingPlayheadPosition = returnPlayheadPosition(payload, settings);
             self.playheadTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(playHeadTimeEvent:) userInfo:nil repeats:YES];
         }
     });
