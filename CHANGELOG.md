@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 1.3.1 *(19th May, 2020)*
+-------------------------------------------
+* Updates `returnPlayheadPosition` to set the `playheadPosition` to the  `currentTime` when the new setting `sendCurrentTimeLivestream` is enabled on livestream videos.
+
 Version 1.3.0 *(18th October, 2019)*
 -------------------------------------------
 * [DEST-1241]
