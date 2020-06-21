@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 1.3.2 *(21st June, 2020)*
+-------------------------------------------
+* Relaxes Segment Analytics library dependency.
+
 Version 1.3.1 *(19th May, 2020)*
 -------------------------------------------
 * Updates `returnPlayheadPosition` to set the `playheadPosition` to the  `currentTime` when the new setting `sendCurrentTimeLivestream` is enabled on livestream videos.

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Segment-Nielsen-DCR'
-  s.version          = '1.3.1'
+  s.version          = '1.3.2'
   s.summary          = "Nielsen DCR Integration for Segment's analytics-ios library."
 
   s.description      = <<-DESC
@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
 
   s.preserve_paths = 'Segment-Nielsen-DCR/Classes/**/*'
 
-  s.dependency 'Analytics', '~> 3.6'
+  s.dependency 'Analytics'
 
 end
