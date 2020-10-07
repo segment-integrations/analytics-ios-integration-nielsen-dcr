@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 1.3.3 *(7th October, 2020)*
+-------------------------------------------
+* Update SEGAnalytics import to support new namespacing introduced in v4.x
+
 Version 1.3.2 *(21st June, 2020)*
 -------------------------------------------
 * Relaxes Segment Analytics library dependency.
