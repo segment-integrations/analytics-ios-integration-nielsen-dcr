@@ -1,44 +1,45 @@
 PODS:
-  - Analytics (3.6.3)
+  - Analytics (4.1.1)
   - Expecta (1.0.6)
-  - NielsenAppSDK (6.2.0.0)
-  - OCHamcrest (6.1.1)
-  - OCMockito (4.1.0):
-    - OCHamcrest (~> 6.0)
-  - Segment-Nielsen-DCR (1.2.8):
-    - Analytics (~> 3.6)
-  - Specta (1.0.6)
+  - NielsenAppSDK (8.0.0.0)
+  - OCHamcrest (7.1.2)
+  - OCMockito (5.1.3):
+    - OCHamcrest (~> 7.0)
+  - Segment-Nielsen-DCR (1.3.3):
+    - Analytics
+    - NielsenAppSDK (~> 8.0)
+  - Specta (1.0.7)
 
 DEPENDENCIES:
   - Expecta
-  - NielsenAppSDK (= 6.2.0.0)
+  - NielsenAppSDK (~> 8.0)
   - OCMockito
   - Segment-Nielsen-DCR (from `../`)
   - Specta
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/NielsenDigitalSDK/nielsenappsdk-ios-specs-dynamic.git:
+    - NielsenAppSDK
+  trunk:
     - Analytics
     - Expecta
     - OCHamcrest
     - OCMockito
     - Specta
-  https://github.com/NielsenDigitalSDK/nielsenappsdk-ios-specs-dynamic.git:
-    - NielsenAppSDK
 
 EXTERNAL SOURCES:
   Segment-Nielsen-DCR:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Analytics: be561304471ed2aa58c4881fea59362dc7bbb4a5
+  Analytics: 952eac761f84ba0a508a4cf691598654073f9e3d
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
-  NielsenAppSDK: be0732f26810c30d4353148d433cfe9da4bf2f96
-  OCHamcrest: 363e1bf738c3e8a94abe7c2c415f70d671adde38
-  OCMockito: bceefcd365252bcdf8b59c1b2bd23890805fc0d8
-  Segment-Nielsen-DCR: 2265f705e6ba9112d228a36d380f964ce4578979
-  Specta: f506f3a8361de16bc0dcf3b17b75e269072ba465
+  NielsenAppSDK: accf3d6810ab397ca2f3d52606e5b63fa77663b9
+  OCHamcrest: b284c9592c28c1e4025a8542e67ea41a635d0d73
+  OCMockito: 677cbb4a18fd492b5a4fb10144dada4de5ddb877
+  Segment-Nielsen-DCR: 2b5a97c4a2480022527e6bc29b146b8fd1d4800f
+  Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
-PODFILE CHECKSUM: 4d5c8b53ee9e350462debbc3036f2ef4a5d85905
+PODFILE CHECKSUM: 6f6949a2137b5ced0ec81a732733746a38414daa
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.10.0
