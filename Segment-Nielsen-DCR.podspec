@@ -16,10 +16,14 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/segment-integrations/analytics-ios-integration-nielsen-dcr.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/segment'
 
-  s.ios.deployment_target = '8.0'
-
+  s.ios.deployment_target = '10.0'
+  s.source_files = 'Segment-Nielsen-DCR/Classes/**/*.{h,m}'
   s.preserve_paths = 'Segment-Nielsen-DCR/Classes/**/*'
 
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 i386' }
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 i386' }
+
   s.dependency 'Analytics'
+  s.dependency 'NielsenAppSDK', '~> 8.0'
 
 end

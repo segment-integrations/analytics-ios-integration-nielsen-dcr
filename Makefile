@@ -26,7 +26,7 @@ test-dev:
 	xcodebuild test $(XC_ARGS) | $(XCPRETTY)
 
 lint:
-	pod lib lint --use-libraries --allow-warnings
+	pod lib lint --use-libraries --allow-warnings --sources=https://cdn.cocoapods.org/,https://github.com/NielsenDigitalSDK/nielsenappsdk-ios-specs-dynamic.git
 
 xcbuild:
 	xctool $(XC_ARGS)

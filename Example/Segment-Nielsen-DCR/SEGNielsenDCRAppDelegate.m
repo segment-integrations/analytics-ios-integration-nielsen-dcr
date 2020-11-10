@@ -7,13 +7,15 @@
 //
 
 #import "SEGNielsenDCRAppDelegate.h"
-#import "SEGNielsenDCRIntegrationFactory.h"
+
+@import NielsenAppApi;
+@import Segment_Nielsen_DCR;
+
 #if defined(__has_include) && __has_include(<Analytics/SEGAnalytics.h>)
 #import <Analytics/SEGAnalytics.h>
 #else
 #import <Segment/SEGAnalytics.h>
 #endif
-//#import <NielsenAppApi/NielsenAppApi.h>
 
 
 @implementation SEGNielsenDCRAppDelegate

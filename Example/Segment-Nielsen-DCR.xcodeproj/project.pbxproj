@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C0EC77F227B01BEF3DD68B6 /* Pods_Segment_Nielsen_DCR_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4B0366959693E40F75AA100 /* Pods_Segment_Nielsen_DCR_Example.framework */; };
+		463E4CC0706BDE01042DDB32 /* Pods_Segment_Nielsen_DCR_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7FA6BBDB3891840B1516EF /* Pods_Segment_Nielsen_DCR_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -23,7 +23,6 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		914544B52C1718165B2330DC /* Pods_Segment_Nielsen_DCR_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6CF5C13C28FB31F8770F985 /* Pods_Segment_Nielsen_DCR_Tests.framework */; };
 		9583623B1F20188A008AA248 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 958362381F20188A008AA248 /* .gitkeep */; };
 		9583623F1F20190A008AA248 /* SEGNielsenDCRIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = 9583623E1F20190A008AA248 /* SEGNielsenDCRIntegration.m */; };
 		958362421F201932008AA248 /* SEGNielsenDCRIntegrationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 958362411F201932008AA248 /* SEGNielsenDCRIntegrationFactory.m */; };
@@ -33,6 +32,7 @@
 		9583624C1F201CB8008AA248 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9583624B1F201CB8008AA248 /* SystemConfiguration.framework */; };
 		9583624E1F201CBF008AA248 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9583624D1F201CBF008AA248 /* AdSupport.framework */; };
 		9583624F1F201F6D008AA248 /* NielsenAppApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958362451F201BD4008AA248 /* NielsenAppApi.framework */; };
+		B8D943F03B83D21EBF0AA9CC /* Pods_Segment_Nielsen_DCR_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2CECDF6A339AEB6B359FBA8 /* Pods_Segment_Nielsen_DCR_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +47,6 @@
 
 /* Begin PBXFileReference section */
 		1824FB3EFC42291A3D3E7CC9 /* Segment-Nielsen-DCR.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "Segment-Nielsen-DCR.podspec"; path = "../Segment-Nielsen-DCR.podspec"; sourceTree = "<group>"; };
-		31AFDF22DF6CAD1C5789D9DD /* Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Segment-Nielsen-DCR_Tests/Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		4F1BA2300B99AD8F8C524DA3 /* Pods-Segment-Nielsen-DCR_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Nielsen-DCR_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Segment-Nielsen-DCR_Example/Pods-Segment-Nielsen-DCR_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* Segment-Nielsen-DCR_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Segment-Nielsen-DCR_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -68,10 +66,10 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		6F7FA6BBDB3891840B1516EF /* Pods_Segment_Nielsen_DCR_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Segment_Nielsen_DCR_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E1ED723945F786DCA56D1E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8B13E3CC2F03AB73502A02E6 /* Pods-Segment-Nielsen-DCR_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Nielsen-DCR_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Segment-Nielsen-DCR_Example/Pods-Segment-Nielsen-DCR_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		958362361F20188A008AA248 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		958362381F20188A008AA248 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		9583623D1F2018F4008AA248 /* SEGNielsenDCRIntegration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SEGNielsenDCRIntegration.h; sourceTree = "<group>"; };
@@ -83,10 +81,12 @@
 		958362491F201CB1008AA248 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9583624B1F201CB8008AA248 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9583624D1F201CBF008AA248 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		9E9DA321F1FD6B108B00AC8A /* Pods-Segment-Nielsen-DCR_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Nielsen-DCR_Example.release.xcconfig"; path = "Target Support Files/Pods-Segment-Nielsen-DCR_Example/Pods-Segment-Nielsen-DCR_Example.release.xcconfig"; sourceTree = "<group>"; };
+		C2CECDF6A339AEB6B359FBA8 /* Pods_Segment_Nielsen_DCR_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Segment_Nielsen_DCR_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4CA42E81FD134642C391829 /* Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig"; path = "Target Support Files/Pods-Segment-Nielsen-DCR_Tests/Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		DF063D3521577A8899ADFC5A /* Pods-Segment-Nielsen-DCR_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Nielsen-DCR_Tests.release.xcconfig"; path = "Target Support Files/Pods-Segment-Nielsen-DCR_Tests/Pods-Segment-Nielsen-DCR_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E595FFEF89E1F09BE3128C72 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		E6BED54881A0F8BE4E2C3A01 /* Pods-Segment-Nielsen-DCR_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Nielsen-DCR_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Segment-Nielsen-DCR_Tests/Pods-Segment-Nielsen-DCR_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		E6CF5C13C28FB31F8770F985 /* Pods_Segment_Nielsen_DCR_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Segment_Nielsen_DCR_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4B0366959693E40F75AA100 /* Pods_Segment_Nielsen_DCR_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Segment_Nielsen_DCR_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F37E181B939A8D1542925F73 /* Pods-Segment-Nielsen-DCR_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-Nielsen-DCR_Example.debug.xcconfig"; path = "Target Support Files/Pods-Segment-Nielsen-DCR_Example/Pods-Segment-Nielsen-DCR_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +101,8 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				1C0EC77F227B01BEF3DD68B6 /* Pods_Segment_Nielsen_DCR_Example.framework in Frameworks */,
 				958362461F201BD4008AA248 /* NielsenAppApi.framework in Frameworks */,
+				B8D943F03B83D21EBF0AA9CC /* Pods_Segment_Nielsen_DCR_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,24 +114,13 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				914544B52C1718165B2330DC /* Pods_Segment_Nielsen_DCR_Tests.framework in Frameworks */,
+				463E4CC0706BDE01042DDB32 /* Pods_Segment_Nielsen_DCR_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		290283E6D037F9BC86EB903A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8B13E3CC2F03AB73502A02E6 /* Pods-Segment-Nielsen-DCR_Example.debug.xcconfig */,
-				4F1BA2300B99AD8F8C524DA3 /* Pods-Segment-Nielsen-DCR_Example.release.xcconfig */,
-				31AFDF22DF6CAD1C5789D9DD /* Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig */,
-				E6BED54881A0F8BE4E2C3A01 /* Pods-Segment-Nielsen-DCR_Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -141,7 +130,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				290283E6D037F9BC86EB903A /* Pods */,
+				D5792D39B815C57E70A9F94D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,8 +155,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				F4B0366959693E40F75AA100 /* Pods_Segment_Nielsen_DCR_Example.framework */,
-				E6CF5C13C28FB31F8770F985 /* Pods_Segment_Nielsen_DCR_Tests.framework */,
+				C2CECDF6A339AEB6B359FBA8 /* Pods_Segment_Nielsen_DCR_Example.framework */,
+				6F7FA6BBDB3891840B1516EF /* Pods_Segment_Nielsen_DCR_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -258,6 +247,17 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		D5792D39B815C57E70A9F94D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F37E181B939A8D1542925F73 /* Pods-Segment-Nielsen-DCR_Example.debug.xcconfig */,
+				9E9DA321F1FD6B108B00AC8A /* Pods-Segment-Nielsen-DCR_Example.release.xcconfig */,
+				D4CA42E81FD134642C391829 /* Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig */,
+				DF063D3521577A8899ADFC5A /* Pods-Segment-Nielsen-DCR_Tests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -265,11 +265,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "Segment-Nielsen-DCR_Example" */;
 			buildPhases = (
-				C385464FCA6945C12A128B34 /* [CP] Check Pods Manifest.lock */,
+				909DA6BF150D66C2E526830A /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				EA71D17187E3055A8D6AF5DC /* [CP] Embed Pods Frameworks */,
+				59D74ED52B2E3B7B1887542A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -284,11 +284,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Segment-Nielsen-DCR_Tests" */;
 			buildPhases = (
-				7694E17DE89165C80B5A50F9 /* [CP] Check Pods Manifest.lock */,
+				EE6FEE32A64C217F7B524CD6 /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				F6010FD55820175AAF601EEF /* [CP] Embed Pods Frameworks */,
+				B8AC37EA378C8AF676ED5B14 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -358,34 +358,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7694E17DE89165C80B5A50F9 /* [CP] Check Pods Manifest.lock */ = {
+		59D74ED52B2E3B7B1887542A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${PODS_ROOT}/Target Support Files/Pods-Segment-Nielsen-DCR_Example/Pods-Segment-Nielsen-DCR_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Analytics/Segment.framework",
+				"${PODS_ROOT}/NielsenAppSDK/NielsenAppApi.framework",
+				"${BUILT_PRODUCTS_DIR}/Segment-Nielsen-DCR/Segment_Nielsen_DCR.framework",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Segment-Nielsen-DCR_Tests-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Segment.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NielsenAppApi.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Segment_Nielsen_DCR.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Segment-Nielsen-DCR_Example/Pods-Segment-Nielsen-DCR_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C385464FCA6945C12A128B34 /* [CP] Check Pods Manifest.lock */ = {
+		909DA6BF150D66C2E526830A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Segment-Nielsen-DCR_Example-checkManifestLockResult.txt",
 			);
@@ -394,27 +402,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA71D17187E3055A8D6AF5DC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Segment-Nielsen-DCR_Example/Pods-Segment-Nielsen-DCR_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Analytics/Analytics.framework",
-				"${PODS_ROOT}/NielsenAppSDK/NielsenAppApi.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Analytics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NielsenAppApi.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Segment-Nielsen-DCR_Example/Pods-Segment-Nielsen-DCR_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6010FD55820175AAF601EEF /* [CP] Embed Pods Frameworks */ = {
+		B8AC37EA378C8AF676ED5B14 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -436,6 +424,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Segment-Nielsen-DCR_Tests/Pods-Segment-Nielsen-DCR_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE6FEE32A64C217F7B524CD6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Segment-Nielsen-DCR_Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -546,7 +556,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -593,7 +603,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -602,7 +612,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B13E3CC2F03AB73502A02E6 /* Pods-Segment-Nielsen-DCR_Example.debug.xcconfig */;
+			baseConfigurationReference = F37E181B939A8D1542925F73 /* Pods-Segment-Nielsen-DCR_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -612,6 +622,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Segment-Nielsen-DCR/Segment-Nielsen-DCR-Prefix.pch";
 				INFOPLIST_FILE = "Segment-Nielsen-DCR/Segment-Nielsen-DCR-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -621,7 +632,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F1BA2300B99AD8F8C524DA3 /* Pods-Segment-Nielsen-DCR_Example.release.xcconfig */;
+			baseConfigurationReference = 9E9DA321F1FD6B108B00AC8A /* Pods-Segment-Nielsen-DCR_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -631,6 +642,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Segment-Nielsen-DCR/Segment-Nielsen-DCR-Prefix.pch";
 				INFOPLIST_FILE = "Segment-Nielsen-DCR/Segment-Nielsen-DCR-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -640,7 +652,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 31AFDF22DF6CAD1C5789D9DD /* Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig */;
+			baseConfigurationReference = D4CA42E81FD134642C391829 /* Pods-Segment-Nielsen-DCR_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -665,7 +677,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6BED54881A0F8BE4E2C3A01 /* Pods-Segment-Nielsen-DCR_Tests.release.xcconfig */;
+			baseConfigurationReference = DF063D3521577A8899ADFC5A /* Pods-Segment-Nielsen-DCR_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

@@ -1,9 +1,11 @@
+source 'https://cdn.cocoapods.org'
 source 'https://github.com/NielsenDigitalSDK/nielsenappsdk-ios-specs-dynamic.git'
 use_frameworks!
+platform :ios, '10.0'
 
 target 'Segment-Nielsen-DCR_Example' do
   pod 'Segment-Nielsen-DCR', :path => '../'
-  pod 'NielsenAppSDK', '6.2.0.0'
+  pod 'NielsenAppSDK', '~> 8.0'
 
   target 'Segment-Nielsen-DCR_Tests' do
     inherit! :search_paths
@@ -11,5 +13,13 @@ target 'Segment-Nielsen-DCR_Example' do
     pod 'OCMockito'
     pod 'Specta'
     pod 'Expecta'
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+    end
   end
 end

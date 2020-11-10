@@ -3,9 +3,12 @@ version: 2
 jobs:
   build_and_test:
     macos:
-      xcode: "11.0"
+      xcode: "12.0"
     steps:
       - checkout
+      - run:
+          name: Set Ruby Version
+          command: echo 'chruby ruby-2.7' >> ~/.bash_profile
       - run: xcrun simctl list
       - run:
           name: Add Nielsen credentials
@@ -19,7 +22,7 @@ jobs:
           name: Install build dependencies
           command: |
             sudo gem install xcpretty
-            sudo gem install cocoapods -v 1.6.1
+            sudo gem install cocoapods -v 1.10.0
       - run:
           name: Fetch Cocoapods specs
           command: curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
