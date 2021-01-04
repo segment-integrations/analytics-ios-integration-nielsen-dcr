@@ -86,7 +86,7 @@ describe(@"SEGNielsenDCRIntegration", ^{
             @"program" : @"Rick and Morty",
             @"total_length" : @400,
             @"full_episode" : @YES,
-            @"publisher" : @"Turner Broadcasting Network
+            @"publisher" : @"Turner Broadcasting Network"
         } context:@{}
             integrations:@{}];
         [integration track:payload];
