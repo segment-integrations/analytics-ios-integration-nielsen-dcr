@@ -100,6 +100,21 @@ NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, 
     return value;
 }
 
+NSString *returnCustomSectionProperty(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
+{
+    NSString *customKey = settings[@"customSectionProperty"];
+    NSString *value;
+    NSString *customSectionName = properties[customKey];
+    if ([customKey length] > 0 && customSectionName){
+        value = [properties valueForKey:customKey];
+    } else if (defaultKey)  {
+        value = defaultKey;
+    } else {
+        value = @"Unknown";
+    }
+    return value;
+}
+
 NSString *returnAirdate(NSDictionary *properties, NSString *defaultKey)
 {
         NSString *dateSTR = [properties valueForKey:defaultKey];
@@ -285,8 +300,8 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 #pragma mark -
 
 - (void)playHeadTimeEvent:(NSTimer *)timer
-{
-    self.startingPlayheadPosition = self.startingPlayheadPosition;
+{ 
+    self.startingPlayheadPosition = self.startingPlayheadPosition + 1;
 
     [self.nielsen playheadPosition:self.startingPlayheadPosition];
     SEGLog(@"[NielsenAppApi playheadPosition: %d]", self.startingPlayheadPosition);
@@ -298,7 +313,8 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
     NSDictionary *settings = self.settings;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.playheadTimer == nil) {
-            self.startingPlayheadPosition = returnPlayheadPosition(payload, settings);
+            // Remove 1 from playhead position to maintain original position
+            self.startingPlayheadPosition = returnPlayheadPosition(payload, settings) - 1;
             self.playheadTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(playHeadTimeEvent:) userInfo:nil repeats:YES];
         }
     });
@@ -451,10 +467,12 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 - (void)screen:(SEGScreenPayload *)payload
 {
     NSDictionary *options = [payload.integrations valueForKey:@"nielsen-dcr"];
+    NSDictionary *properties = payload.properties;
+    NSDictionary *settings = self.settings;
 
     NSDictionary *metadata = @{
         @"type" : @"static",
-        @"section" : payload.name ?: @"Unknown",
+        @"section" : returnCustomSectionProperty(properties, payload.name, settings),
         @"segA" : options[@"segA"] ?: @"",
         @"segB" : options[@"segB"] ?: @"",
         @"segC" : options[@"segC"] ?: @"",
