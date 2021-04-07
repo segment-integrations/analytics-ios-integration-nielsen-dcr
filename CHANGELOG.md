@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+Version 1.5.0 *(7th April, 2021)*
+-------------------------------------------
+* Updates `Video Playback Started` to call `play` and load content metadata.
+* Updates `Video Playback Interrupted` to call `stop`.
+* Maps `Video Playback Exited` to call `stop`.
+* Removes `+1` increment to playhead when `position` = 0.
+* Adds support for setting to map custom property to Nielsen's page/screen `section`, with fallback to `name` field.
+
 Version 1.4.0 *(9th October, 2020)*
 -------------------------------------------
 * Updates Nielsen SDK to 8.x
