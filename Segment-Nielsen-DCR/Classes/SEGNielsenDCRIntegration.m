@@ -100,6 +100,21 @@ NSString *returnCustomAdAssetId(NSDictionary *properties, NSString *defaultKey, 
     return value;
 }
 
+NSString *returnCustomSectionProperty(NSDictionary *properties, NSString *defaultKey, NSDictionary *settings)
+{
+    NSString *customKey = settings[@"customSectionProperty"];
+    NSString *value;
+    NSString *customSectionName = properties[customKey];
+    if ([customKey length] > 0 && customSectionName){
+        value = [properties valueForKey:customKey];
+    } else if (defaultKey)  {
+        value = defaultKey;
+    } else {
+        value = @"Unknown";
+    }
+    return value;
+}
+
 NSString *returnAirdate(NSDictionary *properties, NSString *defaultKey)
 {
         NSString *dateSTR = [properties valueForKey:defaultKey];
@@ -285,7 +300,7 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 #pragma mark -
 
 - (void)playHeadTimeEvent:(NSTimer *)timer
-{
+{ 
     self.startingPlayheadPosition = self.startingPlayheadPosition + 1;
 
     [self.nielsen playheadPosition:self.startingPlayheadPosition];
@@ -298,7 +313,8 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
     NSDictionary *settings = self.settings;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.playheadTimer == nil) {
-            self.startingPlayheadPosition = returnPlayheadPosition(payload, settings);
+            // Remove 1 from playhead position to maintain original position
+            self.startingPlayheadPosition = returnPlayheadPosition(payload, settings) - 1;
             self.playheadTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(playHeadTimeEvent:) userInfo:nil repeats:YES];
         }
     });
@@ -325,8 +341,24 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
     NSDictionary *options = [payload.integrations valueForKey:@"nielsen-dcr"];
 #pragma mark Playback Events
 
-    if ([payload.event isEqualToString:@"Video Playback Started"] ||
-        [payload.event isEqualToString:@"Video Playback Resumed"] ||
+    // Nielsen requires we load content metadata and call play upon playback start
+    if ([payload.event isEqualToString:@"Video Playback Started"]) {
+        NSDictionary *channelInfo = @{
+            // channelName is optional for DCR, if not present Nielsen asks to set default
+            @"channelName" : options[@"channelName"] ?: @"defaultChannelName",
+            // if mediaURL is not available, Nielsen expects an empty value
+            @"mediaURL" : options[@"mediaUrl"] ?: @""
+        };
+        NSDictionary *contentMetadata = returnMappedContentProperties(properties, options, self.settings);
+        [self.nielsen loadMetadata:contentMetadata];
+        SEGLog(@"[NielsenAppApi loadMetadata:%@]", contentMetadata);
+        [self startPlayheadTimer:payload];
+        [self.nielsen play:channelInfo];
+        SEGLog(@"[NielsenAppApi play: %@]", channelInfo);
+        return;
+    }
+
+    if ([payload.event isEqualToString:@"Video Playback Resumed"] ||
         [payload.event isEqualToString:@"Video Playback Seek Completed"] ||
         [payload.event isEqualToString:@"Video Playback Buffer Completed"]) {
         NSDictionary *channelInfo = @{
@@ -344,15 +376,16 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 
     if ([payload.event isEqualToString:@"Video Playback Paused"] ||
         [payload.event isEqualToString:@"Video Playback Seek Started"] ||
-        [payload.event isEqualToString:@"Video Playback Buffer Started"]) {
+        [payload.event isEqualToString:@"Video Playback Buffer Started"] ||
+        [payload.event isEqualToString:@"Video Playback Interrupted"] ||
+        [payload.event isEqualToString:@"Video Playback Exited"]) {
         [self stopPlayheadTimer:payload];
         [self.nielsen stop];
         SEGLog(@"[NielsenAppApi stop]");
         return;
     }
 
-    if ([payload.event isEqualToString:@"Video Playback Interrupted"] ||
-        [payload.event isEqualToString:@"Video Playback Completed"]) {
+    if ([payload.event isEqualToString:@"Video Playback Completed"]) {
         [self stopPlayheadTimer:payload];
         [self.nielsen end];
         SEGLog(@"[NielsenAppApi end]");
@@ -434,10 +467,12 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 - (void)screen:(SEGScreenPayload *)payload
 {
     NSDictionary *options = [payload.integrations valueForKey:@"nielsen-dcr"];
+    NSDictionary *properties = payload.properties;
+    NSDictionary *settings = self.settings;
 
     NSDictionary *metadata = @{
         @"type" : @"static",
-        @"section" : payload.name ?: @"Unknown",
+        @"section" : returnCustomSectionProperty(properties, payload.name, settings),
         @"segA" : options[@"segA"] ?: @"",
         @"segB" : options[@"segB"] ?: @"",
         @"segC" : options[@"segC"] ?: @"",

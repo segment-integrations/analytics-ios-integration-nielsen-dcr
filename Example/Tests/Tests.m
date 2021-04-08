@@ -73,21 +73,46 @@ describe(@"SEGNielsenDCRIntegration", ^{
 
     it(@"tracks Video Playback Started", ^{
         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Started" properties:@{
+            @"airdate": @"2005-06-27T21:00:00Z",
+            @"asset_id" : @"1234",
             @"content_asset_id" : @"1234",
             @"ad_type" : @"pre-roll",
             @"video_player" : @"youtube",
-            @"position" : @1
+            @"position" : @1,
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"season" : @"2",
+            @"episode" : @"7",
+            @"genre" : @"cartoon",
+            @"program" : @"Rick and Morty",
+            @"total_length" : @400,
+            @"full_episode" : @YES,
+            @"publisher" : @"Turner Broadcasting Network"
         } context:@{}
             integrations:@{}];
-
         [integration track:payload];
+        [verify(mockNielsenAppApi) loadMetadata:@{
+            @"pipmode" : @"false",
+            @"adloadtype" : @"1",
+            @"assetid" : @"1234",
+            @"type" : @"content",
+            @"segB" : @"",
+            @"segC" : @"",
+            @"title" : @"Big Trouble in Little Sanchez",
+            @"program" : @"Rick and Morty",
+            @"isfullepisode" : @"y",
+            @"airdate" : @"20050627 21:00:00",
+            @"length" : @"400",
+            @"crossId1" : @"",
+            @"crossId2" : @"",
+            @"hasAds" : @"0"
+        }];
         [verify(mockNielsenAppApi) play:@{
             @"channelName" : @"defaultChannelName",
             @"mediaURL" : @""
         }];
     });
 
-     it(@"tracks Video Playback Resumed", ^{
+    it(@"tracks Video Playback Resumed", ^{
          SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Resumed" properties:@{
             @"content_asset_id" : @"1234",
             @"ad_type" : @"pre-roll",
@@ -188,8 +213,26 @@ describe(@"SEGNielsenDCRIntegration", ^{
             integrations:@{}];
 
         [integration track:payload];
-        [(NielsenAppApi *)verify(mockNielsenAppApi) end];
+        [(NielsenAppApi *)verify(mockNielsenAppApi) stop];
     });
+    
+    it(@"tracks Video Playback Exited", ^{
+        SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Exited" properties:@{
+            @"content_asset_id" : @"7890",
+            @"ad_type" : @"mid-roll",
+            @"video_player" : @"vimeo",
+            @"position" : @30,
+            @"sound" : @100,
+            @"full_screen" : @YES,
+            @"bitrate" : @50
+        }
+            context:@{}
+            integrations:@{}];
+
+        [integration track:payload];
+        [(NielsenAppApi *)verify(mockNielsenAppApi) stop];
+    });
+
 
     it(@"tracks Video Playback Completed", ^{
         SEGTrackPayload *payload = [[SEGTrackPayload alloc] initWithEvent:@"Video Playback Completed" properties:@{
