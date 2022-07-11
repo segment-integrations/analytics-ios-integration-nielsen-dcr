@@ -472,6 +472,7 @@ NSDictionary *returnMappedAdProperties(NSDictionary *properties, NSDictionary *o
 
     NSDictionary *metadata = @{
         @"type" : @"static",
+        @"assetid" : returnCustomContentAssetId(properties, @"asset_id", settings),
         @"section" : returnCustomSectionProperty(properties, payload.name, settings),
         @"segA" : options[@"segA"] ?: @"",
         @"segB" : options[@"segB"] ?: @"",

@@ -5,7 +5,7 @@ PODS:
   - OCHamcrest (7.1.2)
   - OCMockito (5.1.3):
     - OCHamcrest (~> 7.0)
-  - Segment-Nielsen-DCR (1.3.3):
+  - Segment-Nielsen-DCR (1.5.0):
     - Analytics
     - NielsenAppSDK (~> 8.0)
   - Specta (1.0.7)
@@ -37,9 +37,9 @@ SPEC CHECKSUMS:
   NielsenAppSDK: accf3d6810ab397ca2f3d52606e5b63fa77663b9
   OCHamcrest: b284c9592c28c1e4025a8542e67ea41a635d0d73
   OCMockito: 677cbb4a18fd492b5a4fb10144dada4de5ddb877
-  Segment-Nielsen-DCR: 349a90334d60991ed0cc18c5bf97ec399d79bf1b
+  Segment-Nielsen-DCR: ab72be606c0733a4819275ee193ac3e8b045b9f7
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
 PODFILE CHECKSUM: 315925dc5f1dbdfccfdc22ac05040cac88ec80b6
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.11.3

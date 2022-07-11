@@ -40,28 +40,30 @@ describe(@"SEGNielsenDCRIntegration", ^{
 
         [verify(mockNielsenAppApi) loadMetadata:@{
             @"type" : @"static",
+            @"assetid" : @"",
             @"section" : @"Main",
             @"segA" : @"",
             @"segB" : @"",
             @"segC" : @"",
             @"crossId1" : @""
-
         }];
     });
 
     it(@"calls screen with integration specific options", ^{
-        SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:@"Main" properties:@{} context:@{} integrations:@{
-            @"nielsen-dcr" : @{
-                @"segA" : @"segmentA",
-                @"segB" : @"segmentB",
-                @"segC" : @"segmentC",
-                @"crossId1" : @"crossIdValue"
-            }
+        SEGScreenPayload *payload = [[SEGScreenPayload alloc] initWithName:@"Main" 
+            properties:@{@"asset_id" : @"someasset"} context:@{} integrations:@{
+                @"nielsen-dcr" : @{
+                    @"segA" : @"segmentA",
+                    @"segB" : @"segmentB",
+                    @"segC" : @"segmentC",
+                    @"crossId1" : @"crossIdValue"
+                }
         }];
         [integration screen:payload];
 
         [verify(mockNielsenAppApi) loadMetadata:@{
             @"type" : @"static",
+            @"assetid" : @"someasset",
             @"section" : @"Main",
             @"segA" : @"segmentA",
             @"segB" : @"segmentB",
