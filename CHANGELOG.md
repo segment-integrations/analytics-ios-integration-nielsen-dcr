@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 1.5.1 *(11th July, 2022)*
+-------------------------------------------
+* Added assetid to Nielsen properties in Screen calls, pulled from the asset_id property
+
 Version 1.5.0 *(7th April, 2021)*
 -------------------------------------------
 * Updates `Video Playback Started` to call `play` and load content metadata.

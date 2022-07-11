@@ -12,7 +12,7 @@ The Nielsen App SDK as of version 6.0.0.0 is compatible with Apple iOS version 8
 Segment-Nielsen-DCR SDK is not available through [CocoaPods](http://cocoapods.org) trunk due to Nielsen's SDK being in a private spec repo. To install the Segment-Nielsen-DCR pod, add the following line to your Podfile:
 
 ```ruby
-pod "Segment-Nielsen-DCR", :git => 'https://github.com/segment-integrations/analytics-ios-integration-nielsen-dcr.git', :tag => '1.5.0'
+pod "Segment-Nielsen-DCR", :git => 'https://github.com/segment-integrations/analytics-ios-integration-nielsen-dcr.git', :tag => '1.5.1'
 ```
 
 The integration relies on the the Nielsen framework, which can either be installed via Cocoapods or by manually adding the framework. You will need to have a Nielsen representative to get started.
